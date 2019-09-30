@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>University</title>
+</head>
+<body>
+<form method="post">
+
+    Имя студента <input name="name" data-th-value="${student.name}">
+    Дата рождения <input name="dateOfBirth" data-th-value="${student.dateOfBirth}">
+    Выберите номер группы
+    <select  name="groupId" size="1" >
+
+       <th:block  th:each="group:${groups}">
+           <option select th:value="${group.id}"> [[${group.number}]]
+       </th:block>
+
+    </select>
+    <button>Save</button>
+    <br>     <br>
+    <a href="/">На главную</a>
+</form>
+</body>
+</html>

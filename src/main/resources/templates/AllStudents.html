@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>University</title>
+</head>
+<body>
+<h1 align="center" style="background-color:dimgrey"> Студенты нашего Университета улиток </h1>
+<ul>
+    <li data-th-each="student : ${students}">
+        <a data-th-href="@{student/{id}(id=${student.id})}">
+            [[${student.name}]]
+        </a>
+
+    </li>
+</ul>
+<a data-th-href="@{/student/0/edit}">Добавить нового студента</a>
+<br>     <br>
+<a href="/">На главную</a>
+</body>
+</html>

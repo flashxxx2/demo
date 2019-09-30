@@ -3,7 +3,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
-  jpa:
     hibernate:
-      ddl-auto: create-drop
+
+
+url=jdbc:h2:file:~/stapler;AUTO_SERVER=true:jpa:
+    hibernate:
+      ddl-auto: update
     show-sql: true
+server:
+  port: 8080

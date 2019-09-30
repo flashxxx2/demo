@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>University</title>
+</head>
+<body>
+<form method="post">
+    <h2>[[${teacher.name}]]</h2>
+    <h2>[[${teacher.object}]]</h2>
+
+    <div class="card-body">
+        <a data-th-href="@{/teacher/{id}/remove(id=${teacher.id})}" style="color: red">Удалить</a>
+    </div>
+</form>
+<br>     <br>
+<a href="/">На главную</a>
+</body>
+</html>

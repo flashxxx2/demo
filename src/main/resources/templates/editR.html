@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>University</title>
+</head>
+<body>
+<form method="post">
+Имя студента
+
+<select  name="studentsId" size="1" >
+
+    <th:block  th:each="student:${students}">
+        <option select th:value="${student.id}"> [[${student.name}]]
+    </th:block>
+
+</select>
+    Имя преподавателя
+<select  name="teacherId" size="1" >
+
+    <th:block  th:each="teacher:${teachers}">
+        <option select th:value="${teacher.id}"> [[${teacher.name}]]
+    </th:block>
+
+</select>
+Название предмета
+<select  name="object" size="1" >
+
+    <th:block  th:each="teacher:${teachers}">
+        <option select th:value="${teacher.id}"> [[${teacher.object}]]
+    </th:block>
+
+</select>
+Оценка по предмету <input name="value" data-th-value="${rating.value}">
+<button>Save</button>
+<br>     <br>
+<a href="/">На главную</a>
+</form>
+</body>
+</html>
