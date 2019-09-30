@@ -105,6 +105,8 @@ public class Service {
         entity.setStudentsEntity(studentsRepository.findById(rating.getStudentsId()).get());
         //из других энтити нужно имя студ, предмет, препод
         entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherId()).get());
+        entity.setTeachersEntity(rating.getTeacherName());
+       //entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherName()).get());
         ratingRepository.save(entity);
     }
     public void saveGroup(GroupDto group){

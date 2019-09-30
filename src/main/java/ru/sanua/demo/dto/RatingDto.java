@@ -1,11 +1,29 @@
 package ru.sanua.demo.dto;
 
+import ru.sanua.demo.entity.TeachersEntity;
+
 public class RatingDto {
     public Integer id;
     public Integer studentsId;
     public String object;
     public Integer teacherId;
     public Integer value;
+    public TeachersEntity teacherName;
+
+    public TeachersEntity getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(TeachersEntity teacherName) {
+        this.teacherName = teacherName;
+    }
+//    public String getTeacherName() {
+//        return teacherName;
+//    }
+//
+//    public void setTeacherName(String teacherName) {
+//        this.teacherName = teacherName;
+//    }
 
     public Integer getId() {
         return id;
