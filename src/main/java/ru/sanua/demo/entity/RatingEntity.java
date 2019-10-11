@@ -4,11 +4,11 @@ package ru.sanua.demo.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Rating")
+@Table(name= "rating")
 
 public class RatingEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer value;
 

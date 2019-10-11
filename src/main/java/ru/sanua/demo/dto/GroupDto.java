@@ -1,19 +1,16 @@
 package ru.sanua.demo.dto;
 
-import java.util.List;
-
 public class GroupDto {
     public Integer id;
     public Integer number;
-    public String object;
+    public String subject;
 
-
-    public String getObject() {
-        return object;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setObject(String object) {
-        this.object = object;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public Integer getId() {

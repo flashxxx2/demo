@@ -5,7 +5,7 @@ import ru.sanua.demo.entity.TeachersEntity;
 public class RatingDto {
     public Integer id;
     public Integer studentsId;
-    public String object;
+    public String subject;
     public Integer teacherId;
     public Integer value;
     public TeachersEntity teacherName;
@@ -41,12 +41,12 @@ public class RatingDto {
         this.studentsId = studentsId;
     }
 
-    public String getObject() {
-        return object;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setObject(String object) {
-        this.object = object;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public Integer getTeacherId() {

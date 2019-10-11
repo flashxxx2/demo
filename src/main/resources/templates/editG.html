@@ -9,7 +9,7 @@
 Введите номер группы <input name="number" data-th-value="${group.number}">
 
 Название предмета
-<select  name="object" size="1" >
+<select  name="subject" size="1" >
 
     <th:block  th:each="teacher:${teachers}">
         <option select th:value="${teacher.id}"> [[${teacher.object}]]

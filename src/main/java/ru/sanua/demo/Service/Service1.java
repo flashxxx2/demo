@@ -22,14 +22,14 @@ import java.util.Optional;
 
 @org.springframework.stereotype.Service
 
-public class Service {
+public class Service1 {
     @Autowired
     private final GroupsRepository groupsRepository;
     private final RatingRepository ratingRepository;
     private final StudentsRepository studentsRepository;
     private final TeachersRepository teachersRepository;
 
-    public Service(GroupsRepository groupsRepository, RatingRepository ratingRepository, StudentsRepository studentsRepository, TeachersRepository teachersRepository) {
+    public Service1(GroupsRepository groupsRepository, RatingRepository ratingRepository, StudentsRepository studentsRepository, TeachersRepository teachersRepository) {
         this.groupsRepository = groupsRepository;
         this.ratingRepository = ratingRepository;
         this.studentsRepository = studentsRepository;
@@ -85,9 +85,8 @@ public class Service {
         entity.setName(student.getName());
         entity.setDateOfBirth(student.getDateOfBirth());
         entity.setGroupsEntity(groupsRepository.findById(student.getGroupId()).get());
-        //entity.setNumber(groupsRepository.findById(student.getNumber()));
+       // entity.setGroupsEntity(groupsRepository.findById(student.setNumber()));
         entity.setId(student.getId());
-
         studentsRepository.save(entity);
         //из др энтити нужно номер группы
     }
