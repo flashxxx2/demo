@@ -6,19 +6,19 @@
 </head>
 <body>
 <form method="post">
-Введите номер группы <input name="number" data-th-value="${group.number}">
+    Введите номер группы <input name="number" data-th-value="${group.number}">
 
-Название предмета
-<select  name="subject" size="1" >
+    Название предмета
+    <select name="teacherId" size="1">
 
-    <th:block  th:each="teacher:${teachers}">
-        <option select th:value="${teacher.id}"> [[${teacher.object}]]
-    </th:block>
+        <th:block th:each="teacher:${teachers}">
+            <option select th:value="${teacher.id}"> [[${teacher.object}]]
+        </th:block>
 
-</select>
-<button>Save</button>
-<br>     <br>
-<a href="/">На главную</a>
+    </select>
+    <button>Save</button>
+    <br> <br>
+    <a href="/">На главную</a>
 </form>
 </body>
 </html>

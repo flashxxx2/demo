@@ -14,6 +14,10 @@ public class StudentsEntity {
     private String dateOfBirth;
     private Integer number;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "groups_id")
+    private GroupsEntity groupsEntity;
+
     public Integer getNumber() {
         return number;
     }
@@ -21,10 +25,6 @@ public class StudentsEntity {
     public void setNumber(Integer number) {
         this.number = number;
     }
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "groups_id")
-    private GroupsEntity groupsEntity;
 
     public Integer getId() {
         return id;

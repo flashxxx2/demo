@@ -14,6 +14,13 @@ public class GroupsEntity {
     private String subject;
 
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupsEntity")
+    private List<StudentsEntity> studentsEntities;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "teacher_id")
+    private TeachersEntity teachersEntity;
+
     public String getSubject() {
         return subject;
     }
@@ -22,8 +29,14 @@ public class GroupsEntity {
         this.subject = subject;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupsEntity")
-    private List<StudentsEntity> studentsEntities;
+
+    public TeachersEntity getTeachersEntity() {
+        return teachersEntity;
+    }
+
+    public void setTeachersEntity(TeachersEntity teachersEntity) {
+        this.teachersEntity = teachersEntity;
+    }
 
 
     public Integer getId() {
@@ -43,7 +56,6 @@ public class GroupsEntity {
     }
 
 
-
     public List<StudentsEntity> getStudentsEntities() {
         return studentsEntities;
     }
@@ -51,7 +63,6 @@ public class GroupsEntity {
     public void setStudentsEntities(List<StudentsEntity> studentsEntities) {
         this.studentsEntities = studentsEntities;
     }
-
 
 
 }

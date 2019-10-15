@@ -96,7 +96,7 @@ public class Service {
         TeachersEntity entity = getByIdTeachersOrEmpty(teacher.getId());
         entity.setName(teacher.getName());
         entity.setObject(teacher.getObject());
-        entity.setGroupsEntity(groupsRepository.findById(teacher.getGroupId()).get());
+//        entity.setGroupsEntity(groupsRepository.findById(teacher.getGroupId()).get());
         teachersRepository.save(entity);
     }
 
@@ -108,13 +108,16 @@ public class Service {
         //из других энтити нужно имя студ, предмет, препод
         entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherId()).get());
         //entity.setTeachersEntity(.getName());
-       //entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherName()).get());
+        //entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherName()).get());
         ratingRepository.save(entity);
     }
-    public void saveGroup(GroupDto group){
-        GroupsEntity entity =getByIdGroupsOrEmpty(group.getId());
+
+    public void saveGroup(GroupDto group) {
+        GroupsEntity entity = getByIdGroupsOrEmpty(group.getId());
         entity.setNumber(group.getNumber());
-        entity.setSubject(group.getSubject());
+        //entity.setSubject(group.getSubject());
+        entity.setTeachersEntity(teachersRepository.findById(group.getTeacherId()).get());
+
         groupsRepository.save(entity);
     }
 //    public List<StudentsEntity> getGoodStudents(){
@@ -124,7 +127,7 @@ public class Service {
     @Transactional
     public void removeStudentById(Integer id) {
         studentsRepository.deleteById(id);
-          ratingRepository.deleteById(id);
+        ratingRepository.deleteById(id);
         //  teachersRepository.deleteById(id);
         // groupsRepository.deleteById(id);
 

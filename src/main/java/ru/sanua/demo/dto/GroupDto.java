@@ -4,6 +4,15 @@ public class GroupDto {
     public Integer id;
     public Integer number;
     public String subject;
+    public Integer teacherId;
+
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
 
     public String getSubject() {
         return subject;

@@ -24,7 +24,7 @@ public class StudentsController {
 
     @GetMapping("student/{id}")
     public String getById(@PathVariable Integer id, Model model) {
-        model.addAttribute("group", service.getByIdGroupsOrEmpty(id));
+       // model.addAttribute("group", service.getByIdGroupsOrEmpty(id));
         model.addAttribute("student", service.getByIdOrEmpty(id));
         return "view";
     }

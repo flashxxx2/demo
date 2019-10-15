@@ -7,7 +7,7 @@
 <body>
 <form method="post">
     <h2>[[${student.name}]]</h2>
-    <h2>[[${group.number}]]</h2>
+    <h2>[[${student.groupsEntity.number}]]</h2>
     <h2>[[${student.dateOfBirth}]]</h2>
     <div class="card-body">
         <a data-th-href="@{/student/{id}/remove(id=${student.id})}" style="color: red">Удалить</a>
