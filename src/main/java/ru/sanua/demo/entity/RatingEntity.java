@@ -48,6 +48,13 @@ public class RatingEntity {
     @JoinColumn(name = "teacher_id")
     private TeachersEntity teachersEntity;
 
+    public StudentsEntity getStudentsEntity() {
+        return studentsEntity;
+    }
+
+    public TeachersEntity getTeachersEntity() {
+        return teachersEntity;
+    }
 
     public Integer getId() {
         return id;

@@ -6,10 +6,10 @@
 </head>
 <body>
 <form method="post">
-    <h2>[[${student.name}]]</h2>
-    <h2>[[${rating.value}]]</h2>
-    <h2>[[${teacher.name}]]</h2>
-    <h2>[[${teacher.object}]]</h2>
+    Имя Студента  <h2>[[${rating.studentsEntity.name}]]</h2>
+    Средний балл по предметам <h2>[[${rating.value}]]</h2>
+    Имя преподавателя <h2>[[${rating.teachersEntity.name}]]</h2>
+    Список предметов  <h2>[[${rating.teachersEntity.object}]]</h2>
     <div class="card-body">
         <a data-th-href="@{/rating/{id}/remove(id=${rating.id})}" style="color: red">Удалить</a>
     </div>

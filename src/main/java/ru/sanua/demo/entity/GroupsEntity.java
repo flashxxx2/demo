@@ -11,7 +11,7 @@ public class GroupsEntity {
     private Integer id;
 
     private Integer number;
-    private String subject;
+   // private String subject;
 
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupsEntity")
@@ -21,13 +21,13 @@ public class GroupsEntity {
     @JoinColumn(name = "teacher_id")
     private TeachersEntity teachersEntity;
 
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+//    public String getSubject() {
+//        return subject;
+//    }
+//
+//    public void setSubject(String subject) {
+//        this.subject = subject;
+//    }
 
 
     public TeachersEntity getTeachersEntity() {

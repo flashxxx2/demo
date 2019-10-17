@@ -30,10 +30,11 @@ public class RatingController {
     @GetMapping("rating/{id}")
     public String getById(@PathVariable Integer id, Model model) {
         model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
-        model.addAttribute("student", service.getByIdOrEmpty(id));
-        model.addAttribute("teacher", service.getByIdTeachersOrEmpty(id));
+       // model.addAttribute("student", service.getByIdOrEmpty(id));
+       // model.addAttribute("teacher", service.getByIdTeachersOrEmpty(id));
         return "viewR";
     }
+
 
     @GetMapping("/rating/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {

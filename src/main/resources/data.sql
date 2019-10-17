@@ -10,9 +10,9 @@ values ( 'Malahov',' Mathematics'),
 
 
 
-insert into groups (number, subject, teacher_id) values (793, 'Mathematics',1),
-                                                (792,' History',2),
-                                                (791, 'Chemistry',3);
+insert into groups (number,teacher_id) values (793,1),
+                                                (792,2),
+                                                (791,3);
 
 
 
