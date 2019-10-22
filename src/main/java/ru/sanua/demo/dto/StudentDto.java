@@ -7,6 +7,7 @@ public class StudentDto {
     public Integer groupId;
     public Integer number;
 
+
     public Integer getNumber() {
         return number;
     }
@@ -22,7 +23,6 @@ public class StudentDto {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
 
     public String getName() {

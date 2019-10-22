@@ -14,8 +14,8 @@ public class GroupsEntity {
    // private String subject;
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupsEntity")
-    private List<StudentsEntity> studentsEntities;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupsEntity")
+//    private List<StudentsEntity> studentsEntities;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
@@ -56,15 +56,15 @@ public class GroupsEntity {
     }
 
 
-    public List<StudentsEntity> getStudentsEntities() {
-        return studentsEntities;
-    }
-
-    public void setStudentsEntities(List<StudentsEntity> studentsEntities) {
-        this.studentsEntities = studentsEntities;
-    }
-
-
+//    public List<StudentsEntity> getStudentsEntities() {
+//        return studentsEntities;
+//    }
+//
+//    public void setStudentsEntities(List<StudentsEntity> studentsEntities) {
+//        this.studentsEntities = studentsEntities;
+//    }
+//
+//
 }
 
 

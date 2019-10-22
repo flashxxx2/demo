@@ -4,7 +4,7 @@ package ru.sanua.demo.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name= "rating")
+@Table(name = "rating")
 
 public class RatingEntity {
     @Id
@@ -15,6 +15,10 @@ public class RatingEntity {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "students_id")
     private StudentsEntity studentsEntity;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "teacher_id")
+    private TeachersEntity teachersEntity;
 
 
     public void setId(Integer id) {
@@ -34,19 +38,14 @@ public class RatingEntity {
     }
 
 
-
     public String getTeacherName() {
         return teachersEntity.getName();
     }
-    public String getObject(){
+
+    public String getObject() {
         return teachersEntity.getObject();
     }
 
-
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id")
-    private TeachersEntity teachersEntity;
 
     public StudentsEntity getStudentsEntity() {
         return studentsEntity;
@@ -60,7 +59,7 @@ public class RatingEntity {
         return id;
     }
 
-        public Integer getValue() {
+    public Integer getValue() {
         return value;
     }
- }
+}

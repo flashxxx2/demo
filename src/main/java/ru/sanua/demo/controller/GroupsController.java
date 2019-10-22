@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sanua.demo.Service.Service;
 import ru.sanua.demo.dto.GroupDto;
-import ru.sanua.demo.dto.StudentDto;
 import ru.sanua.demo.repository.GroupsRepository;
 
 @Controller
