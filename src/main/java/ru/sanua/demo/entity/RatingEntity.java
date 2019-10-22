@@ -12,14 +12,23 @@ public class RatingEntity {
     private Integer id;
     private Integer value;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "students_id")
     private StudentsEntity studentsEntity;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id")
-    private TeachersEntity teachersEntity;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "subject_id")
+    private SubjectEntity subjectEntity;
+
+    public SubjectEntity getSubjectEntity() {
+        return subjectEntity;
+    }
+
+    public void setSubjectEntity(SubjectEntity subjectEntity) {
+        this.subjectEntity = subjectEntity;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -33,27 +42,11 @@ public class RatingEntity {
         this.studentsEntity = studentsEntity;
     }
 
-    public void setTeachersEntity(TeachersEntity teachersEntity) {
-        this.teachersEntity = teachersEntity;
-    }
-
-
-    public String getTeacherName() {
-        return teachersEntity.getName();
-    }
-
-    public String getObject() {
-        return teachersEntity.getObject();
-    }
-
-
     public StudentsEntity getStudentsEntity() {
         return studentsEntity;
     }
 
-    public TeachersEntity getTeachersEntity() {
-        return teachersEntity;
-    }
+
 
     public Integer getId() {
         return id;

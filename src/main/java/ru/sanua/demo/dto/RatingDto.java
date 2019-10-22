@@ -2,28 +2,21 @@ package ru.sanua.demo.dto;
 
 import ru.sanua.demo.entity.TeachersEntity;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 public class RatingDto {
     public Integer id;
     public Integer studentsId;
-    public String subject;
-    public Integer teacherId;
     public Integer value;
-    public TeachersEntity teacherName;
+    public Integer subjectId;
 
-    public TeachersEntity getTeacherName() {
-        return teacherName;
+    public Integer getSubjectId() {
+        return subjectId;
     }
 
-    public void setTeacherName(TeachersEntity teacherName) {
-        this.teacherName = teacherName;
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
-//    public String getTeacherName() {
-//        return teacherName;
-//    }
-//
-//    public void setTeacherName(String teacherName) {
-//        this.teacherName = teacherName;
-//    }
 
     public Integer getId() {
         return id;
@@ -39,22 +32,6 @@ public class RatingDto {
 
     public void setStudentsId(Integer studentsId) {
         this.studentsId = studentsId;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
     }
 
     public Integer getValue() {

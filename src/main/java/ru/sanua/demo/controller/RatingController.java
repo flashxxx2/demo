@@ -30,8 +30,6 @@ public class RatingController {
     @GetMapping("rating/{id}")
     public String getById(@PathVariable Integer id, Model model) {
         model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
-       // model.addAttribute("student", service.getByIdOrEmpty(id));
-       // model.addAttribute("teacher", service.getByIdTeachersOrEmpty(id));
         return "viewR";
     }
 
@@ -42,7 +40,7 @@ public class RatingController {
         TeachersEntity teacher = service.getByIdTeachersOrEmpty(id);
         model.addAttribute("teacher", teacher);
         model.addAttribute("students", service.findAllStudents());
-        model.addAttribute("teachers", service.findAllTeacher());
+        model.addAttribute("subjects", service.findAllSubjects());
         model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
         return "editR";
     }

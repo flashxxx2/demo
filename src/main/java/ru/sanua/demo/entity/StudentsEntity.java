@@ -14,34 +14,11 @@ public class StudentsEntity {
     private String name;
     private String dateOfBirth;
     private Integer number;
-    private Integer value;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "groups_id")
     private GroupsEntity groupsEntity;
-
-    @ManyToMany
-    @JoinTable(name = "student_subject",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "subject_id"))
-    private List<SubjectEntity> subjectEntities;
-
-    public List<SubjectEntity> getSubjectEntities() {
-        return subjectEntities;
-    }
-
-    public void setSubjectEntities(List<SubjectEntity> subjectEntities) {
-        this.subjectEntities = subjectEntities;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
 
     public Integer getNumber() {
         return number;

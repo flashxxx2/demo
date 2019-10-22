@@ -20,8 +20,10 @@ values ('4 March 1992', 'Anton',1),
        ('4 March', 'Nastya',3),
        ('25 November', 'Alex',2);
 
-insert into rating (value, students_id, teacher_id) VALUES (5,1,1),
-                                                           (4,2,2),
-                                                           (3,3,3),
+insert into subject (subject_name) values ('History'),('Mathematics'),('Chemistry'),('Philosofy');
+
+insert into rating (value, students_id, subject_id) VALUES (5,1,1),
+                                                           (4,2,1),
+                                                           (3,3,2),
                                                            (3.5,4,3),
                                                            (2.5,5,2);

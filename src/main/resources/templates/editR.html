@@ -15,19 +15,12 @@
     </th:block>
 
 </select>
-    Имя преподавателя
-<select  name="teacherId" size="1" >
 
-    <th:block  th:each="teacher:${teachers}">
-        <option select th:value="${teacher.id}"> [[${teacher.name}]]
-    </th:block>
-
-</select>
 Название предмета
-<select  name="object" size="1" >
+<select  name="subjectId" size="1" >
 
-    <th:block  th:each="teacher:${teachers}">
-        <option select th:value="${teacher.id}"> [[${teacher.object}]]
+    <th:block  th:each="subject:${subjects}">
+        <option select th:value="${subject.id}"> [[${subject.subjectName}]]
     </th:block>
 
 </select>

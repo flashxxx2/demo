@@ -6,15 +6,9 @@ import ru.sanua.demo.dto.GroupDto;
 import ru.sanua.demo.dto.RatingDto;
 import ru.sanua.demo.dto.StudentDto;
 import ru.sanua.demo.dto.TeacherDto;
-import ru.sanua.demo.entity.GroupsEntity;
-import ru.sanua.demo.entity.RatingEntity;
-import ru.sanua.demo.entity.StudentsEntity;
-import ru.sanua.demo.entity.TeachersEntity;
+import ru.sanua.demo.entity.*;
 import ru.sanua.demo.exception.StudentNotFoundException;
-import ru.sanua.demo.repository.GroupsRepository;
-import ru.sanua.demo.repository.RatingRepository;
-import ru.sanua.demo.repository.StudentsRepository;
-import ru.sanua.demo.repository.TeachersRepository;
+import ru.sanua.demo.repository.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,13 +22,19 @@ public class Service {
     private final RatingRepository ratingRepository;
     private final StudentsRepository studentsRepository;
     private final TeachersRepository teachersRepository;
+    private final SubjectRepository subjectRepository;
 
-    public Service(GroupsRepository groupsRepository, RatingRepository ratingRepository, StudentsRepository studentsRepository, TeachersRepository teachersRepository) {
+    public Service(GroupsRepository groupsRepository, RatingRepository ratingRepository, StudentsRepository studentsRepository, TeachersRepository teachersRepository, SubjectRepository subjectRepository) {
         this.groupsRepository = groupsRepository;
         this.ratingRepository = ratingRepository;
         this.studentsRepository = studentsRepository;
         this.teachersRepository = teachersRepository;
+        this.subjectRepository = subjectRepository;
     }
+
+
+
+
 
     public List<StudentsEntity> getAll() {
         return studentsRepository.findAll();
@@ -64,6 +64,9 @@ public class Service {
     public List<StudentsEntity> findAllStudents() {
         return studentsRepository.findAll();
 
+    }
+    public List<SubjectEntity> findAllSubjects(){
+        return subjectRepository.findAll();
     }
 
     public List<RatingEntity> findAllRatings() {
@@ -103,12 +106,9 @@ public class Service {
     public void saveRaiting(RatingDto rating) {
         RatingEntity entity = getByIdRatingOrEmpty(rating.getId());
         entity.setValue(rating.getValue());
-
+        entity.setSubjectEntity(subjectRepository.findById(rating.getSubjectId()).get());
         entity.setStudentsEntity(studentsRepository.findById(rating.getStudentsId()).get());
-        //из других энтити нужно имя студ, предмет, препод
-        entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherId()).get());
-        //entity.setTeachersEntity(.getName());
-        //entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherName()).get());
+       // entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherId()).get());
         ratingRepository.save(entity);
     }
 

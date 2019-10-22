@@ -11,19 +11,6 @@ public class SubjectEntity {
     private Integer id;
     private String subjectName;
 
-    @ManyToMany
-    @JoinTable(name = "student_subject",
-            joinColumns = @JoinColumn(name = "subject_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private List<StudentsEntity> studentsEntities;
-
-    public List<StudentsEntity> getStudentsEntities() {
-        return studentsEntities;
-    }
-
-    public void setStudentsEntities(List<StudentsEntity> studentsEntityes) {
-        this.studentsEntities = studentsEntityes;
-    }
 
 
     public Integer getId() {
