@@ -13,6 +13,19 @@ public class SubjectEntity {
 
 
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "teacher_id")
+    private TeachersEntity teachersEntity;
+
+    public TeachersEntity getTeachersEntity() {
+        return teachersEntity;
+    }
+
+    public void setTeachersEntity(TeachersEntity teachersEntity) {
+        this.teachersEntity = teachersEntity;
+    }
+
     public Integer getId() {
         return id;
     }

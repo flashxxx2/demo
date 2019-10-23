@@ -1,10 +1,20 @@
 package ru.sanua.demo.dto;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 public class GroupDto {
     public Integer id;
     public Integer number;
-    //public String subject;
     public Integer teacherId;
+    public Integer subjectId;
+
+    public Integer getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
+    }
 
     public Integer getTeacherId() {
         return teacherId;
@@ -14,13 +24,6 @@ public class GroupDto {
         this.teacherId = teacherId;
     }
 
-//    //public String getSubject() {
-//        return subject;
-//    }
-
-//    public void setSubject(String subject) {
-//        this.subject = subject;
-//    }
 
     public Integer getId() {
         return id;

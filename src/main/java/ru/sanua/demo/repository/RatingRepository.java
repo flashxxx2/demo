@@ -13,4 +13,6 @@ import java.util.List;
 public interface RatingRepository extends JpaRepository<RatingEntity, Integer> {
 
   //  List<StudentsEntity> findAllByStudentsEntityOrderByValueAsc();
+
+    List<Integer>findRatingEntitiesByValueOrderByValueDesc();
 }

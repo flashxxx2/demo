@@ -32,10 +32,6 @@ public class Service {
         this.subjectRepository = subjectRepository;
     }
 
-
-
-
-
     public List<StudentsEntity> getAll() {
         return studentsRepository.findAll();
     }
@@ -60,12 +56,18 @@ public class Service {
         return optionalRatingEntity.orElseThrow(RuntimeException::new);
     }
 
+    public SubjectEntity getByIdSubjectOrEmpty(Integer id) {
+        Optional<SubjectEntity> optionalSubjectEntity = Optional.of(subjectRepository.findById(id).orElse(new SubjectEntity()));
+        return optionalSubjectEntity.orElseThrow(RuntimeException::new);
+    }
+
 
     public List<StudentsEntity> findAllStudents() {
         return studentsRepository.findAll();
 
     }
-    public List<SubjectEntity> findAllSubjects(){
+
+    public List<SubjectEntity> findAllSubjects() {
         return subjectRepository.findAll();
     }
 
@@ -98,8 +100,8 @@ public class Service {
     public void saveTeacher(TeacherDto teacher) {
         TeachersEntity entity = getByIdTeachersOrEmpty(teacher.getId());
         entity.setName(teacher.getName());
-        entity.setObject(teacher.getObject());
-//        entity.setGroupsEntity(groupsRepository.findById(teacher.getGroupId()).get());
+        entity.setSubjectEntity(subjectRepository.findById(teacher.getSubjectId()).get());
+
         teachersRepository.save(entity);
     }
 
@@ -108,15 +110,14 @@ public class Service {
         entity.setValue(rating.getValue());
         entity.setSubjectEntity(subjectRepository.findById(rating.getSubjectId()).get());
         entity.setStudentsEntity(studentsRepository.findById(rating.getStudentsId()).get());
-       // entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherId()).get());
         ratingRepository.save(entity);
     }
 
     public void saveGroup(GroupDto group) {
         GroupsEntity entity = getByIdGroupsOrEmpty(group.getId());
         entity.setNumber(group.getNumber());
-        //entity.setSubject(group.getSubject());
-        entity.setTeachersEntity(teachersRepository.findById(group.getTeacherId()).get());
+        entity.setSubjectEntity(subjectRepository.findById(group.getSubjectId()).get());
+        // entity.setTeachersEntity(teachersRepository.findById(group.getTeacherId()).get());
 
         groupsRepository.save(entity);
     }
@@ -141,7 +142,12 @@ public class Service {
 
     @Transactional
     public void removeGroupById(Integer id) {
+        ratingRepository.deleteById(id);
+        studentsRepository.deleteById(id);
         groupsRepository.deleteById(id);
+
+
+
     }
 
     @Transactional

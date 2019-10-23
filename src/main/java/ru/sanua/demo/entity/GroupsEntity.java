@@ -11,31 +11,16 @@ public class GroupsEntity {
     private Integer id;
 
     private Integer number;
-   // private String subject;
-
-
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "groupsEntity")
-//    private List<StudentsEntity> studentsEntities;
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id")
-    private TeachersEntity teachersEntity;
+    @JoinColumn(name = "subject_id")
+    private SubjectEntity subjectEntity;
 
-//    public String getSubject() {
-//        return subject;
-//    }
-//
-//    public void setSubject(String subject) {
-//        this.subject = subject;
-//    }
-
-
-    public TeachersEntity getTeachersEntity() {
-        return teachersEntity;
+     public SubjectEntity getSubjectEntity() {
+        return subjectEntity;
     }
 
-    public void setTeachersEntity(TeachersEntity teachersEntity) {
-        this.teachersEntity = teachersEntity;
+    public void setSubjectEntity(SubjectEntity subjectEntity) {
+        this.subjectEntity = subjectEntity;
     }
 
 
@@ -55,16 +40,6 @@ public class GroupsEntity {
         this.number = number;
     }
 
-
-//    public List<StudentsEntity> getStudentsEntities() {
-//        return studentsEntities;
-//    }
-//
-//    public void setStudentsEntities(List<StudentsEntity> studentsEntities) {
-//        this.studentsEntities = studentsEntities;
-//    }
-//
-//
 }
 
 

@@ -1,16 +1,16 @@
 
+insert into subject (subject_name) values ('History'),('Mathematics'),('Chemistry'),('Philosofy'),('Economy');
+
+insert into teacher (name, subject_id)
+values ( 'Malahov',1),
+       ('Gubin', 2),
+       ('Petrov', 3),
+       ('Sidorov',4),
+       ('Drakin',5);
 
 
-insert into teacher (name, object)
-values ( 'Malahov',' Mathematics'),
-       ('Gubin', 'History'),
-       ('Petrov', 'Chemistry'),
-       ('Sidorov','Economy'),
-       ('Drakin','Philosofy');
 
-
-
-insert into groups (number,teacher_id) values (793,1),
+insert into groups (number,subject_id) values (793,1),
                                               (792,2),
                                               (791,3);
 insert into student (date_of_birth, name, groups_id)
@@ -20,7 +20,7 @@ values ('4 March 1992', 'Anton',1),
        ('4 March', 'Nastya',3),
        ('25 November', 'Alex',2);
 
-insert into subject (subject_name) values ('History'),('Mathematics'),('Chemistry'),('Philosofy');
+
 
 insert into rating (value, students_id, subject_id) VALUES (5,1,1),
                                                            (4,2,1),

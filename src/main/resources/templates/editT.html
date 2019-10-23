@@ -8,7 +8,14 @@
 <form method="post">
 
     Имя преподавателя <input name="name" data-th-value="${teacher.name}">
-    Название предмета <input name="object" data-th-value="${teacher.object}">
+    Выберите предмет
+    <select  name="subjectId" size="1" >
+
+        <th:block  th:each="subject:${subjects}">
+            <option select th:value="${subject.id}"> [[${subject.subjectName}]]
+        </th:block>
+
+    </select>
     Выберите номер группы
     <select  name="groupId" size="1" >
 

@@ -6,8 +6,8 @@
 </head>
 <body>
 <form method="post">
-    <h2>[[${teacher.name}]]</h2>
-    <h2>[[${teacher.object}]]</h2>
+    Имя преподавателя <h2>[[${teacher.name}]]</h2>
+   Предмет  <h2>[[${teacher.subjectEntity.subjectName}]]</h2>
 
     <div class="card-body">
         <a data-th-href="@{/teacher/{id}/remove(id=${teacher.id})}" style="color: red">Удалить</a>

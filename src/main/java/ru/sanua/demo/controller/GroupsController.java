@@ -45,7 +45,7 @@ public class GroupsController {
     }
     @GetMapping("/group/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("teachers", service.findAllTeacher());
+        model.addAttribute("subjects", service.findAllSubjects());
         model.addAttribute("group",service.getByIdGroupsOrEmpty(id));
         return "editG";
     }

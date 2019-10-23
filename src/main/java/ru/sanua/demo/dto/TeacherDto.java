@@ -3,7 +3,8 @@ package ru.sanua.demo.dto;
 public class TeacherDto {
     public Integer id;
     public String name;
-    public String object;
+    public Integer subjectId;
+
 
     public Integer groupId;
 
@@ -19,11 +20,17 @@ public class TeacherDto {
         return id;
     }
 
+    public Integer getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
-
-
 
     public String getName() {
         return name;
@@ -33,11 +40,5 @@ public class TeacherDto {
         this.name = name;
     }
 
-    public String getObject() {
-        return object;
-    }
 
-    public void setObject(String object) {
-        this.object = object;
-    }
 }

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface StudentsRepository extends JpaRepository<StudentsEntity, Integer> {
     List<StudentsEntity> findAll();
+   // List<StudentsEntity> findStudentsEntitiesBy
+
        }

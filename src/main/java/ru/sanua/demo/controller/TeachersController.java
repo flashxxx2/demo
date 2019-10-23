@@ -26,7 +26,8 @@ public class TeachersController {
 
     @GetMapping("teacher/{id}")
     public String getById(@PathVariable Integer id, Model model) {
-        model.addAttribute("teacher", service.getByIdTeachersOrEmpty(id));
+        model.addAttribute("subject", service.getByIdSubjectOrEmpty(id));
+        model.addAttribute("teacher",service.getByIdTeachersOrEmpty(id));
         return "viewT";
     }
 
@@ -44,6 +45,7 @@ public class TeachersController {
 
     @GetMapping("/teacher/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
+        model.addAttribute("subjects", service.findAllSubjects());
         model.addAttribute("teacher", service.getByIdTeachersOrEmpty(id));
         model.addAttribute("groups", service.findAllGroups());
         return "editT";
