@@ -6,7 +6,7 @@
 </head>
 <body>
 <form method="post">
-    Имя Студента  <h2>[[${rating.studentsEntity.name}]]</h2>
+    Имя Студента  <h2>[[${rating.studentEntity.name}]]</h2>
     Средний балл по предметам <h2>[[${rating.value}]]</h2>
      <div class="card-body">
         <a data-th-href="@{/rating/{id}/remove(id=${rating.id})}" style="color: red">Удалить</a>

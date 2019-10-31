@@ -10,17 +10,18 @@ public class RatingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer value;
+    private Double value;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "students_id")
-    private StudentsEntity studentsEntity;
-
+    private StudentEntity studentEntity;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id")
     private SubjectEntity subjectEntity;
+
 
     public SubjectEntity getSubjectEntity() {
         return subjectEntity;
@@ -34,25 +35,25 @@ public class RatingEntity {
         this.id = id;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
-    public void setStudentsEntity(StudentsEntity studentsEntity) {
-        this.studentsEntity = studentsEntity;
+    public void setStudentEntity(StudentEntity studentEntity) {
+        this.studentEntity = studentEntity;
     }
 
-    public StudentsEntity getStudentsEntity() {
-        return studentsEntity;
+    public StudentEntity getStudentEntity() {
+        return studentEntity;
     }
-
 
 
     public Integer getId() {
         return id;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
+
     }
 }

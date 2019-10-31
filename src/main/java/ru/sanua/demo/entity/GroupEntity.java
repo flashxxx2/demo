@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "groups")
-public class GroupsEntity {
+public class GroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

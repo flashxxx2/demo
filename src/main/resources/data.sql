@@ -25,5 +25,5 @@ values ('4 March 1992', 'Anton',1),
 insert into rating (value, students_id, subject_id) VALUES (5,1,1),
                                                            (4,2,1),
                                                            (3,3,2),
-                                                           (3.5,4,3),
-                                                           (2.5,5,2);
+                                                           (3,4,3),
+                                                           (2,5,2);

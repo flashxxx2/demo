@@ -9,6 +9,7 @@ import ru.sanua.demo.Service.Service;
 import ru.sanua.demo.dto.GroupDto;
 import ru.sanua.demo.repository.GroupsRepository;
 
+
 @Controller
 @RequestMapping("/")
 
@@ -17,21 +18,25 @@ public class GroupsController {
     private final GroupsRepository repository;
     private final Service service;
 
+
     @Autowired
     public GroupsController(GroupsRepository repository, Service service) {
         this.repository = repository;
         this.service = service;
     }
+
     @GetMapping("/groups")
-    public String findAll(Model model){
-        model.addAttribute("groups",service.findAllGroups());
+    public String findAll(Model model) {
+        model.addAttribute("groups", service.findAllGroups());
         return "AllGroups";
     }
+
     @GetMapping("groups/{id}")
     public String getById(@PathVariable Integer id, Model model) {
         model.addAttribute("group", service.getByIdGroupsOrEmpty(id));
         return "viewG";
     }
+
     @GetMapping("group/{id}/remove")
     public String remove(@PathVariable Integer id, Model model) {
         model.addAttribute("group", service.getByIdGroupsOrEmpty(id));
@@ -43,10 +48,11 @@ public class GroupsController {
         service.removeGroupById(id);
         return "redirect:/groups";
     }
+
     @GetMapping("/group/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("subjects", service.findAllSubjects());
-        model.addAttribute("group",service.getByIdGroupsOrEmpty(id));
+        model.addAttribute("group", service.getByIdGroupsOrEmpty(id));
         return "editG";
     }
 
@@ -57,4 +63,6 @@ public class GroupsController {
 
         return "redirect:/groups";
     }
+
+
 }

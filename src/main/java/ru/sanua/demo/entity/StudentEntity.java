@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "student")
-public class StudentsEntity {
+public class StudentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,20 +13,31 @@ public class StudentsEntity {
 
     private String name;
     private String dateOfBirth;
-    private Integer number;
+//    private Integer number;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "groups_id")
-    private GroupsEntity groupsEntity;
+    private GroupEntity groupEntity;
 
-    public Integer getNumber() {
-        return number;
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "studentEntity")
+    List<RatingEntity> ratingEntities;
+
+    public List<RatingEntity> getRatingEntities() {
+        return ratingEntities;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setRatingEntities(List<RatingEntity> ratingEntities) {
+        this.ratingEntities = ratingEntities;
     }
+
+//    public Integer getNumber() {
+//        return number;
+//    }
+
+//    public void setNumber(Integer number) {
+//        this.number = number;
+//    }
 
     public Integer getId() {
         return id;
@@ -52,11 +63,11 @@ public class StudentsEntity {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public GroupsEntity getGroupsEntity() {
-        return groupsEntity;
+    public GroupEntity getGroupEntity() {
+        return groupEntity;
     }
 
-    public void setGroupsEntity(GroupsEntity groupsEntity) {
-        this.groupsEntity = groupsEntity;
+    public void setGroupEntity(GroupEntity groupEntity) {
+        this.groupEntity = groupEntity;
     }
 }

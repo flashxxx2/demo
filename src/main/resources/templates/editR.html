@@ -8,7 +8,7 @@
 <form method="post">
 Имя студента
 
-<select  name="studentsId" size="1" >
+<select  name="studentId" size="1" >
 
     <th:block  th:each="student:${students}">
         <option select th:value="${student.id}"> [[${student.name}]]

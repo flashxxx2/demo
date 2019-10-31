@@ -5,16 +5,16 @@ public class StudentDto {
     public String name;
     public String dateOfBirth;
     public Integer groupId;
-    public Integer number;
+   // public Integer number;
 
 
-    public Integer getNumber() {
-        return number;
-    }
+//    public Integer getNumber() {
+//        return number;
+//    }
 
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
+//    public void setNumber(Integer number) {
+//        this.number = number;
+//    }
 
     public Integer getId() {
         return id;

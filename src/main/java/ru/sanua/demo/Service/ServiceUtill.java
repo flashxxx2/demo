@@ -1,20 +1,18 @@
 package ru.sanua.demo.Service;
 
-import ru.sanua.demo.repository.RatingRepository;
 
+import ru.sanua.demo.entity.RatingEntity;
+import ru.sanua.demo.repository.RatingsRepository;
+
+import java.util.HashMap;
 import java.util.List;
 
+
 public class ServiceUtill {
-    private final   RatingRepository ratingRepository;
+    private final RatingsRepository ratingsRepository;
 
-    public ServiceUtill(RatingRepository ratingRepository) {
-        this.ratingRepository = ratingRepository;
+    public ServiceUtill(RatingsRepository ratingsRepository) {
+        this.ratingsRepository = ratingsRepository;
     }
 
-    public List<Integer> getAllBotans(){
-
-       List<Integer> values = ratingRepository.findRatingEntitiesByValueOrderByValueDesc();
-
-        return values;
-    }
 }

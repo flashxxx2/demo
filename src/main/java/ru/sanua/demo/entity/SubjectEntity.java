@@ -1,7 +1,6 @@
 package ru.sanua.demo.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "subject")
@@ -16,14 +15,14 @@ public class SubjectEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
-    private TeachersEntity teachersEntity;
+    private TeacherEntity teacherEntity;
 
-    public TeachersEntity getTeachersEntity() {
-        return teachersEntity;
+    public TeacherEntity getTeacherEntity() {
+        return teacherEntity;
     }
 
-    public void setTeachersEntity(TeachersEntity teachersEntity) {
-        this.teachersEntity = teachersEntity;
+    public void setTeacherEntity(TeacherEntity teacherEntity) {
+        this.teacherEntity = teacherEntity;
     }
 
     public Integer getId() {

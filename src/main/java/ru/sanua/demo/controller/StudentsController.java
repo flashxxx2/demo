@@ -12,19 +12,19 @@ import ru.sanua.demo.dto.StudentDto;
 
 public class StudentsController {
     private final Service service;
+
     @Autowired
     public StudentsController(Service service) {
         this.service = service;
     }
 
-     @GetMapping
+    @GetMapping
     public String getAll() {
         return "index";
     }
 
     @GetMapping("student/{id}")
     public String getById(@PathVariable Integer id, Model model) {
-       // model.addAttribute("group", service.getByIdGroupsOrEmpty(id));
         model.addAttribute("student", service.getByIdOrEmpty(id));
         return "view";
     }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>University</title>
+</head>
+<body>
+<li data-th-each="student : ${students}">
+    <a data-th-href="@{student/{id}(id=${student.id})}">
+        [[${student.name}]]
+    </a>
+
+</li>
+[[${botans}]]
+</body>
+</html>

@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sanua.demo.Service.Service;
+import ru.sanua.demo.dto.AverageDto;
 import ru.sanua.demo.dto.RatingDto;
-import ru.sanua.demo.entity.TeachersEntity;
+
+import java.util.List;
+
 
 
 @Controller
@@ -15,10 +18,10 @@ import ru.sanua.demo.entity.TeachersEntity;
 public class RatingController {
     private final Service service;
 
+
     @Autowired
     public RatingController(Service service) {
         this.service = service;
-
     }
 
     @GetMapping("/ratings")
@@ -37,8 +40,6 @@ public class RatingController {
     @GetMapping("/rating/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
 
-        TeachersEntity teacher = service.getByIdTeachersOrEmpty(id);
-        model.addAttribute("teacher", teacher);
         model.addAttribute("students", service.findAllStudents());
         model.addAttribute("subjects", service.findAllSubjects());
         model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
@@ -66,4 +67,13 @@ public class RatingController {
         service.removeRatingById(id);
         return "redirect:/ratings";
     }
+
+    @GetMapping("/ratings/botans")
+    public String getBotans(Model model, @ModelAttribute AverageDto averageDto) {
+       List<AverageDto> botans = service.getListAvarageDto(averageDto);
+        model.addAttribute("botans", botans);
+        model.addAttribute("students",service.findAllStudents());
+        return "botans";
+    }
+
 }
