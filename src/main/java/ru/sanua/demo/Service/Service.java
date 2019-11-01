@@ -181,50 +181,52 @@ public class Service {
 
     public List<AverageDto> getListAvarageDto() {
         double summ;
-        double avrValue;
+        double avrValue = 0;
         List<StudentEntity> listOfStudents = studentsRepository.findAll();
         List<AverageDto> averageDtoList = new ArrayList();
         for (int i = 0; i < listOfStudents.size(); i++) {
             AverageDto averageDto = new AverageDto();
 
 
-            for (int j = 0; j < findAllSubjects().size(); j++) {
-                avrValue = listOfStudents.get(i).getRatingEntities().get(j).getValue();
-                averageDto.setAvrValue(avrValue);
-                averageDto.setStudentId(listOfStudents.get(i).getId());
-                averageDto.setStudentName(listOfStudents.get(i).getName());
+            for (int j = 0; j < listOfStudents.get(i).getRatingEntities().size(); j++) {
+                avrValue = avrValue + listOfStudents.get(i).getRatingEntities().get(j).getValue();
             }
+            avrValue = Math.round(avrValue * 100);
+            avrValue = avrValue / 100;
+            averageDto.setAvrValue(avrValue / listOfStudents.get(i).getRatingEntities().size());
+            averageDto.setStudentId(listOfStudents.get(i).getId());
+            averageDto.setStudentName(listOfStudents.get(i).getName());
+            averageDtoList.add(averageDto);
 
-
-            if (listOfStudents.get(i).getRatingEntities().size() == 1) {
-
-                avrValue = listOfStudents.get(i).getRatingEntities().get(0).getValue();
-                averageDto.setAvrValue(avrValue);
-                averageDto.setStudentId(listOfStudents.get(i).getId());
-                averageDto.setStudentName(listOfStudents.get(i).getName());
-
-            }
-            if (listOfStudents.get(i).getRatingEntities().size() == 2) {
-                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue();
-                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
-
-                averageDto.setAvrValue(avrValue);
-                averageDto.setStudentId(listOfStudents.get(i).getId());
-                averageDto.setStudentName(listOfStudents.get(i).getName());
-            }
-            if (listOfStudents.get(i).getRatingEntities().size() == 3) {
-                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue() + listOfStudents.get(i).getRatingEntities().get(2).getValue();
-                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
-
-                avrValue = Math.round(avrValue * 100);
-                avrValue = avrValue / 100;
-                averageDto.setAvrValue(avrValue);
-
-                averageDto.setStudentId(listOfStudents.get(i).getId());
-                averageDto.setStudentName(listOfStudents.get(i).getName());
-
-                averageDtoList.add(averageDto);
-            }
+            //            if (listOfStudents.get(i).getRatingEntities().size() == 1) {
+//
+//                avrValue = listOfStudents.get(i).getRatingEntities().get(0).getValue();
+//                averageDto.setAvrValue(avrValue);
+//                averageDto.setStudentId(listOfStudents.get(i).getId());
+//                averageDto.setStudentName(listOfStudents.get(i).getName());
+//
+//            }
+//            if (listOfStudents.get(i).getRatingEntities().size() == 2) {
+//                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue();
+//                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
+//
+//                averageDto.setAvrValue(avrValue);
+//                averageDto.setStudentId(listOfStudents.get(i).getId());
+//                averageDto.setStudentName(listOfStudents.get(i).getName());
+//            }
+//            if (listOfStudents.get(i).getRatingEntities().size() == 3) {
+//                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue() + listOfStudents.get(i).getRatingEntities().get(2).getValue();
+//                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
+//
+//                avrValue = Math.round(avrValue * 100);
+//                avrValue = avrValue / 100;
+//                averageDto.setAvrValue(avrValue);
+//
+//                averageDto.setStudentId(listOfStudents.get(i).getId());
+//                averageDto.setStudentName(listOfStudents.get(i).getName());
+//
+//                averageDtoList.add(averageDto);
+//            }
 
         }
         return averageDtoList;

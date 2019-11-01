@@ -68,7 +68,7 @@ public class RatingController {
 
     @GetMapping("/ratings/botans")
     public String getBotans(Model model) {
-        model.addAttribute("botans", service.getListBotans());
+        model.addAttribute("botans", service.getListAvarageDto());
         return "botans";
     }
 
