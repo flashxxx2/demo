@@ -22,7 +22,6 @@ public class StudentEntity {
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "studentEntity")
     List<RatingEntity> ratingEntities;
-
     public List<RatingEntity> getRatingEntities() {
         return ratingEntities;
     }
@@ -30,15 +29,6 @@ public class StudentEntity {
     public void setRatingEntities(List<RatingEntity> ratingEntities) {
         this.ratingEntities = ratingEntities;
     }
-
-//    public Integer getNumber() {
-//        return number;
-//    }
-
-//    public void setNumber(Integer number) {
-//        this.number = number;
-//    }
-
     public Integer getId() {
         return id;
     }

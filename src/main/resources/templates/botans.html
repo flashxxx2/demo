@@ -5,12 +5,14 @@
     <title>University</title>
 </head>
 <body>
-<li data-th-each="student : ${students}">
-    <a data-th-href="@{student/{id}(id=${student.id})}">
-        [[${student.name}]]
+<li data-th-each="botan : ${botans}">
+    <a data-th-href="@{botan/{id}(id=${botan.id})}">
+     Имя студента   <h3>[[${botan.studentName}]]</h3>
+       Средний балл  <h3>[[${botan.avrValue}]]</h3>
+        <br> <br>
     </a>
-
-</li>
-[[${botans}]]
+ </li>
+<a href="/ratings">Назад</a>
+<br> <br>
 </body>
 </html>

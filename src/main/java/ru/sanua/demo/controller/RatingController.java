@@ -8,9 +8,6 @@ import ru.sanua.demo.Service.Service;
 import ru.sanua.demo.dto.AverageDto;
 import ru.sanua.demo.dto.RatingDto;
 
-import java.util.List;
-
-
 
 @Controller
 @RequestMapping("/")
@@ -31,8 +28,9 @@ public class RatingController {
     }
 
     @GetMapping("rating/{id}")
-    public String getById(@PathVariable Integer id, Model model) {
+    public String getRatingById(@PathVariable Integer id, Model model) {
         model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
+        model.addAttribute("average", service.getListAvarageDto().get(id - 1));
         return "viewR";
     }
 
@@ -69,11 +67,15 @@ public class RatingController {
     }
 
     @GetMapping("/ratings/botans")
-    public String getBotans(Model model, @ModelAttribute AverageDto averageDto) {
-       List<AverageDto> botans = service.getListAvarageDto(averageDto);
-        model.addAttribute("botans", botans);
-        model.addAttribute("students",service.findAllStudents());
+    public String getBotans(Model model) {
+        model.addAttribute("botans", service.getListBotans());
         return "botans";
+    }
+
+    @GetMapping("/ratings/loosers")
+    public String getLoosers(Model model) {
+        model.addAttribute("loosers", service.getListLoosers());
+        return "loosers";
     }
 
 }

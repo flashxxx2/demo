@@ -3,8 +3,16 @@ package ru.sanua.demo.dto;
 public class AverageDto {
     private Integer id;
     private String studentName;
-    private Double averageValue;
+    private Double avrValue;
+    private Integer studentId;
 
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
 
     public Integer getId() {
         return id;
@@ -22,12 +30,12 @@ public class AverageDto {
         this.studentName = studentName;
     }
 
-    public Double getAverageValue() {
-        return averageValue;
+    public Double getAvrValue() {
+        return avrValue;
     }
 
-    public void setAverageValue(Double averageValue) {
-        this.averageValue = averageValue;
+    public void setAvrValue(Double avrValue) {
+        this.avrValue = avrValue;
     }
 
 

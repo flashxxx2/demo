@@ -7,9 +7,8 @@ import ru.sanua.demo.entity.*;
 import ru.sanua.demo.exception.StudentNotFoundException;
 import ru.sanua.demo.repository.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.text.DecimalFormat;
+import java.util.*;
 
 
 @org.springframework.stereotype.Service
@@ -29,6 +28,7 @@ public class Service {
         this.studentsRepository = studentsRepository;
         this.teachersRepository = teachersRepository;
         this.subjectsRepository = subjectRepository;
+
 
     }
 
@@ -60,8 +60,12 @@ public class Service {
         Optional<SubjectEntity> optionalSubjectEntity = Optional.of(subjectsRepository.findById(id).orElse(new SubjectEntity()));
         return optionalSubjectEntity.orElseThrow(RuntimeException::new);
     }
+    //    public AverageEntity getByIdAverageOrEmpty(Integer id) {
+//        Optional<AverageEntity> optionalAverageEntity = Optional.of(averageRepository.findById(id).orElse(new AverageEntity()));
+//        return optionalAverageEntity.orElseThrow(RuntimeException::new);
+//    }
 
-       public List<StudentEntity> findAllStudents() {
+    public List<StudentEntity> findAllStudents() {
         return studentsRepository.findAll();
 
     }
@@ -146,33 +150,110 @@ public class Service {
         studentsRepository.deleteById(id);
     }
 
-    public List<AverageDto> getListAvarageDto(AverageDto averageDto) {
-        double summ = 0;
-        Integer sizeEntity;
-        double avrValue = 0;
+//    public List<AverageEntity> getListAvarageEntity() {
+//        double summ;
+//        double avrValue;
+//        List<StudentEntity> listOfStudents = studentsRepository.findAll();
+//        List<AverageEntity> averageEntityList = new ArrayList();
+//        for (int i = 0; i < listOfStudents.size(); i++) {
+//            AverageEntity averageEntity = getByIdAverageOrEmpty(i);
+//            if (listOfStudents.get(i).getRatingEntities().size() == 1) {
+//
+//                avrValue = listOfStudents.get(i).getRatingEntities().get(0).getValue();
+//                averageEntity.setId(i);
+//                averageEntity.setAverageValue(avrValue);
+//                averageEntity.setStudentName(listOfStudents.get(i).getName());
+//
+//            }
+//            if (listOfStudents.get(i).getRatingEntities().size() == 2) {
+//                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue();
+//                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
+//                averageEntity.setId(i);
+//                averageEntity.setAverageValue(avrValue);
+//                averageEntity.setStudentName(listOfStudents.get(i).getName());
+//            }
+//            averageRepository.save(averageEntity);
+//            averageEntityList.add(averageEntity);
+//        }
+//        return averageEntityList;
+//    }
+
+
+    public List<AverageDto> getListAvarageDto() {
+        double summ;
+        double avrValue;
         List<StudentEntity> listOfStudents = studentsRepository.findAll();
         List<AverageDto> averageDtoList = new ArrayList();
-
         for (int i = 0; i < listOfStudents.size(); i++) {
+            AverageDto averageDto = new AverageDto();
 
 
-            if (listOfStudents.get(i).getRatingEntities().size()== 1) {
+            for (int j = 0; j < findAllSubjects().size(); j++) {
+                avrValue = listOfStudents.get(i).getRatingEntities().get(j).getValue();
+                averageDto.setAvrValue(avrValue);
+                averageDto.setStudentId(listOfStudents.get(i).getId());
+                averageDto.setStudentName(listOfStudents.get(i).getName());
+            }
 
+
+            if (listOfStudents.get(i).getRatingEntities().size() == 1) {
 
                 avrValue = listOfStudents.get(i).getRatingEntities().get(0).getValue();
-                averageDto.setId(i);
-                averageDto.setAverageValue(avrValue);
+                averageDto.setAvrValue(avrValue);
+                averageDto.setStudentId(listOfStudents.get(i).getId());
                 averageDto.setStudentName(listOfStudents.get(i).getName());
+
             }
             if (listOfStudents.get(i).getRatingEntities().size() == 2) {
                 summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue();
                 avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
-                averageDto.setAverageValue(avrValue);
+
+                averageDto.setAvrValue(avrValue);
+                averageDto.setStudentId(listOfStudents.get(i).getId());
                 averageDto.setStudentName(listOfStudents.get(i).getName());
             }
-            averageDtoList.add(averageDto);
+            if (listOfStudents.get(i).getRatingEntities().size() == 3) {
+                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue() + listOfStudents.get(i).getRatingEntities().get(2).getValue();
+                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
+
+                avrValue = Math.round(avrValue * 100);
+                avrValue = avrValue / 100;
+                averageDto.setAvrValue(avrValue);
+
+                averageDto.setStudentId(listOfStudents.get(i).getId());
+                averageDto.setStudentName(listOfStudents.get(i).getName());
+
+                averageDtoList.add(averageDto);
+            }
+
         }
         return averageDtoList;
     }
 
+    public List<AverageDto> getListBotans() {
+        List<AverageDto> listBotans = getListAvarageDto();
+        Collections.sort(listBotans, new Comparator<AverageDto>() {
+            @Override
+            public int compare(AverageDto o1, AverageDto o2) {
+                return o2.getAvrValue().toString().compareTo(o1.getAvrValue().toString());
+            }
+        });
+        return listBotans.subList(0, 3);
+    }
+//    public AverageDto getAverageDto(){
+//        return getListAvarageDto().get();
+//    }
+//
+
+    public List<AverageDto> getListLoosers() {
+        List<AverageDto> listLoosers = getListAvarageDto();
+        Collections.sort(listLoosers, new Comparator<AverageDto>() {
+            @Override
+            public int compare(AverageDto o1, AverageDto o2) {
+                return o1.getAvrValue().toString().compareTo(o2.getAvrValue().toString());
+            }
+        });
+        return listLoosers.subList(0, 3);
+    }
 }
+

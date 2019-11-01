@@ -11,20 +11,6 @@ public class SubjectEntity {
     private String subjectName;
 
 
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id")
-    private TeacherEntity teacherEntity;
-
-    public TeacherEntity getTeacherEntity() {
-        return teacherEntity;
-    }
-
-    public void setTeacherEntity(TeacherEntity teacherEntity) {
-        this.teacherEntity = teacherEntity;
-    }
-
     public Integer getId() {
         return id;
     }
