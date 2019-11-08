@@ -10,6 +10,7 @@
    Предмет  <h2>[[${teacher.subjectEntity.subjectName}]]</h2>
 
     <div class="card-body">
+        <a data-th-href="@{/teacher/{id}/edit(id=${teacher.id})}" style="color: red">Редактировать</a>
         <a data-th-href="@{/teacher/{id}/remove(id=${teacher.id})}" style="color: red">Удалить</a>
     </div>
 </form>

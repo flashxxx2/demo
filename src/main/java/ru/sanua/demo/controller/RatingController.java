@@ -30,7 +30,7 @@ public class RatingController {
     @GetMapping("rating/{id}")
     public String getRatingById(@PathVariable Integer id, Model model) {
         model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
-        model.addAttribute("average", service.getListAvarageDto().get(id - 1));
+        model.addAttribute("average", service.getListAvarageDto().get(id-1));
         return "viewR";
     }
 
@@ -68,11 +68,11 @@ public class RatingController {
 
     @GetMapping("/ratings/botans")
     public String getBotans(Model model) {
-        model.addAttribute("botans", service.getListAvarageDto());
+        model.addAttribute("botans", service.getListBotans());
         return "botans";
     }
 
-    @GetMapping("/ratings/loosers")
+      @GetMapping("/ratings/loosers")
     public String getLoosers(Model model) {
         model.addAttribute("loosers", service.getListLoosers());
         return "loosers";

@@ -14,7 +14,7 @@ public class RatingEntity {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "students_id")
+    @JoinColumn(name = "student_id")
     private StudentEntity studentEntity;
 
 

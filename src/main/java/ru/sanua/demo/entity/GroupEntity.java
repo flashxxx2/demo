@@ -2,20 +2,18 @@ package ru.sanua.demo.entity;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "groups")
 public class GroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private Integer number;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id")
     private SubjectEntity subjectEntity;
 
-     public SubjectEntity getSubjectEntity() {
+    public SubjectEntity getSubjectEntity() {
         return subjectEntity;
     }
 

@@ -1,6 +1,7 @@
 package ru.sanua.demo.controller;
 
 
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +57,19 @@ public class GroupsController {
         return "editG";
     }
 
+    @GetMapping("/group/{id}/addSubject")
+    public String addSubject(@PathVariable Integer id, Model model) {
+        model.addAttribute("subjects", service.findAllSubjects());
+        model.addAttribute("groups", service.findAllGroups());
+
+        return "addSubject";
+    }
+
+    @PostMapping("/group/{id}/addSubject")
+    public String saveSubject(@PathVariable Integer id, @ModelAttribute GroupDto groupDto) {
+        service.saveGroupSubject(groupDto);
+        return "redirect:/groups";
+    }
 
     @PostMapping("/group/{id}/edit")
     public String save(@PathVariable int id, @ModelAttribute GroupDto groupDto) {

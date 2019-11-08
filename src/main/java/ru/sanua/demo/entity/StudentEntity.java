@@ -13,15 +13,17 @@ public class StudentEntity {
 
     private String name;
     private String dateOfBirth;
-//    private Integer number;
+
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "groups_id")
+    @JoinColumn(name = "group_id")
     private GroupEntity groupEntity;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "studentEntity")
     List<RatingEntity> ratingEntities;
+
+
     public List<RatingEntity> getRatingEntities() {
         return ratingEntities;
     }

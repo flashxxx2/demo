@@ -6,12 +6,26 @@
 </head>
 <body>
 <form method="post">
-   Список предметов группы  <h2>[[${group.subjectEntity.subjectName}]]</h2>
-       <div class="card-body">
+    Список предметов группы
+
+    <li data-th-each="teacher : ${teachers}">
+        <a data-th-href="@{teacher/{id}(id=${teacher.id})}">
+            [[${teacher.name}]]
+        </a>
+    </li>
+    <h2>[[${group.subjectEntity.subjectName}]]</h2>
+
+
+    <div class="card-body">
+        <a data-th-href="@{/group/0/addSubject}">Добавить новых предметов в группу</a>
+        <br> <br>
+        <a data-th-href="@{/group/{id}/edit(id=${group.id})}" style="color: red">Редактировать</a>
         <a data-th-href="@{/group/{id}/remove(id=${group.id})}" style="color: red">Удалить</a>
     </div>
+
+
 </form>
-<br>     <br>
+<br> <br>
 <a href="/">На главную</a>
 </body>
 </html>

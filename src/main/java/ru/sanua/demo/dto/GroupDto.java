@@ -4,9 +4,21 @@ import javax.persistence.criteria.CriteriaBuilder;
 
 public class GroupDto {
     public Integer id;
+    private Integer groupId;
     public Integer number;
-    public Integer teacherId;
+  //  public Integer teacherId;
     public Integer subjectId;
+
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+
 
     public Integer getSubjectId() {
         return subjectId;
@@ -16,13 +28,13 @@ public class GroupDto {
         this.subjectId = subjectId;
     }
 
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
-    }
+//    public Integer getTeacherId() {
+//        return teacherId;
+//    }
+//
+//    public void setTeacherId(Integer teacherId) {
+//        this.teacherId = teacherId;
+//    }
 
 
     public Integer getId() {

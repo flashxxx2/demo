@@ -111,7 +111,6 @@ public class Service {
         RatingEntity entity = getByIdRatingOrEmpty(rating.getId());
         entity.setValue(rating.getValue());
         entity.setSubjectEntity(subjectsRepository.findById(rating.getSubjectId()).get());
-        entity.setStudentEntity(studentsRepository.findById(rating.getStudentId()).get());
         ratingsRepository.save(entity);
     }
 
@@ -120,9 +119,17 @@ public class Service {
         entity.setNumber(group.getNumber());
         entity.setSubjectEntity(subjectsRepository.findById(group.getSubjectId()).get());
 
+
         groupsRepository.save(entity);
     }
 
+    public void saveGroupSubject(GroupDto group) {
+        GroupEntity entity = getByIdGroupsOrEmpty(group.getId());
+        entity.setSubjectEntity(subjectsRepository.findById(group.getSubjectId()).get());
+        entity.setId(group.getGroupId());
+        entity.setNumber(getByIdGroupsOrEmpty(group.getGroupId()).getNumber());
+        groupsRepository.save(entity);
+    }
 
     @Transactional
     public void removeStudentById(Integer id) {
@@ -139,10 +146,17 @@ public class Service {
 
     @Transactional
     public void removeGroupById(Integer id) {
-        ratingsRepository.deleteById(id);
-        studentsRepository.deleteById(id);
+        for (int i = 0; i < findAllStudents().size(); i++) {
+
+            if (findAllStudents().get(i).getGroupEntity().getId() == id) {
+                findAllStudents().remove(0);
+            }
+
+        }
         groupsRepository.deleteById(id);
+
     }
+
 
     @Transactional
     public void removeRatingById(Integer id) {
@@ -150,87 +164,29 @@ public class Service {
         studentsRepository.deleteById(id);
     }
 
-//    public List<AverageEntity> getListAvarageEntity() {
-//        double summ;
-//        double avrValue;
-//        List<StudentEntity> listOfStudents = studentsRepository.findAll();
-//        List<AverageEntity> averageEntityList = new ArrayList();
-//        for (int i = 0; i < listOfStudents.size(); i++) {
-//            AverageEntity averageEntity = getByIdAverageOrEmpty(i);
-//            if (listOfStudents.get(i).getRatingEntities().size() == 1) {
-//
-//                avrValue = listOfStudents.get(i).getRatingEntities().get(0).getValue();
-//                averageEntity.setId(i);
-//                averageEntity.setAverageValue(avrValue);
-//                averageEntity.setStudentName(listOfStudents.get(i).getName());
-//
-//            }
-//            if (listOfStudents.get(i).getRatingEntities().size() == 2) {
-//                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue();
-//                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
-//                averageEntity.setId(i);
-//                averageEntity.setAverageValue(avrValue);
-//                averageEntity.setStudentName(listOfStudents.get(i).getName());
-//            }
-//            averageRepository.save(averageEntity);
-//            averageEntityList.add(averageEntity);
-//        }
-//        return averageEntityList;
-//    }
-
-
     public List<AverageDto> getListAvarageDto() {
-        double summ;
+        double summ = 0;
         double avrValue = 0;
         List<StudentEntity> listOfStudents = studentsRepository.findAll();
         List<AverageDto> averageDtoList = new ArrayList();
         for (int i = 0; i < listOfStudents.size(); i++) {
+            summ = 0;
             AverageDto averageDto = new AverageDto();
-
-
             for (int j = 0; j < listOfStudents.get(i).getRatingEntities().size(); j++) {
-                avrValue = avrValue + listOfStudents.get(i).getRatingEntities().get(j).getValue();
+                summ = summ + listOfStudents.get(i).getRatingEntities().get(j).getValue();
+                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
+                avrValue = Math.round(avrValue * 100);
+                avrValue = avrValue / 100;
+                averageDto.setAvrValue(avrValue);
+                averageDto.setId(getByIdRatingOrEmpty(j).getId());
+               // averageDto.setStudentId(listOfStudents.get(i).getId());
+                averageDto.setStudentName(listOfStudents.get(i).getName());
             }
-            avrValue = Math.round(avrValue * 100);
-            avrValue = avrValue / 100;
-            averageDto.setAvrValue(avrValue / listOfStudents.get(i).getRatingEntities().size());
-            averageDto.setStudentId(listOfStudents.get(i).getId());
-            averageDto.setStudentName(listOfStudents.get(i).getName());
             averageDtoList.add(averageDto);
-
-            //            if (listOfStudents.get(i).getRatingEntities().size() == 1) {
-//
-//                avrValue = listOfStudents.get(i).getRatingEntities().get(0).getValue();
-//                averageDto.setAvrValue(avrValue);
-//                averageDto.setStudentId(listOfStudents.get(i).getId());
-//                averageDto.setStudentName(listOfStudents.get(i).getName());
-//
-//            }
-//            if (listOfStudents.get(i).getRatingEntities().size() == 2) {
-//                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue();
-//                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
-//
-//                averageDto.setAvrValue(avrValue);
-//                averageDto.setStudentId(listOfStudents.get(i).getId());
-//                averageDto.setStudentName(listOfStudents.get(i).getName());
-//            }
-//            if (listOfStudents.get(i).getRatingEntities().size() == 3) {
-//                summ = listOfStudents.get(i).getRatingEntities().get(0).getValue() + listOfStudents.get(i).getRatingEntities().get(1).getValue() + listOfStudents.get(i).getRatingEntities().get(2).getValue();
-//                avrValue = summ / listOfStudents.get(i).getRatingEntities().size();
-//
-//                avrValue = Math.round(avrValue * 100);
-//                avrValue = avrValue / 100;
-//                averageDto.setAvrValue(avrValue);
-//
-//                averageDto.setStudentId(listOfStudents.get(i).getId());
-//                averageDto.setStudentName(listOfStudents.get(i).getName());
-//
-//                averageDtoList.add(averageDto);
-//            }
-
         }
         return averageDtoList;
     }
+
 
     public List<AverageDto> getListBotans() {
         List<AverageDto> listBotans = getListAvarageDto();
@@ -242,10 +198,6 @@ public class Service {
         });
         return listBotans.subList(0, 3);
     }
-//    public AverageDto getAverageDto(){
-//        return getListAvarageDto().get();
-//    }
-//
 
     public List<AverageDto> getListLoosers() {
         List<AverageDto> listLoosers = getListAvarageDto();
@@ -254,6 +206,7 @@ public class Service {
             public int compare(AverageDto o1, AverageDto o2) {
                 return o1.getAvrValue().toString().compareTo(o2.getAvrValue().toString());
             }
+
         });
         return listLoosers.subList(0, 3);
     }
