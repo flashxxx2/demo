@@ -36,7 +36,9 @@ public class RatingController {
         for (AverageDto averageDto : averageDtos) {
             if (averageDto.getStudentId()==userId){
                 model.addAttribute("average", averageDto);
+
             }
+            else return "exceptionRating";
         }
         return "viewR";
     }

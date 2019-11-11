@@ -62,11 +62,11 @@ public class GroupsController {
         return "addSubject";
     }
 
-    @PostMapping("/group/{id}/addSubject")
-    public String saveSubject(@PathVariable Integer id, @ModelAttribute GroupDto groupDto) {
-        service.saveGroupSubject(groupDto);
-        return "redirect:/groups";
-    }
+//    @PostMapping("/group/{id}/addSubject")
+//    public String saveSubject(@PathVariable Integer id, @ModelAttribute GroupDto groupDto) {
+//        service.saveGroupSubject(groupDto);
+//        return "redirect:/groups";
+//    }
 
     @PostMapping("/group/{id}/edit")
     public String save(@PathVariable int id, @ModelAttribute GroupDto groupDto) {

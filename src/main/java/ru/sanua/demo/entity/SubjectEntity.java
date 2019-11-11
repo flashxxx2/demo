@@ -10,19 +10,6 @@ public class SubjectEntity {
     private Integer id;
     private String subjectName;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_id")
-    private GroupEntity groupEntity;
-
-    public GroupEntity getGroupEntity() {
-        return groupEntity;
-    }
-
-    public void setGroupEntity(GroupEntity groupEntity) {
-        this.groupEntity = groupEntity;
-    }
-
     public Integer getId() {
         return id;
     }

@@ -28,6 +28,7 @@ public class StudentsController {
 
     @GetMapping("student/{id}")
     public String getById(@PathVariable Integer id, Model model) {
+
         model.addAttribute("student", service.getByIdOrEmpty(id));
         return "view";
     }
@@ -55,7 +56,7 @@ public class StudentsController {
 
     @GetMapping("student/{id}/remove")
     public String remove(@PathVariable Integer id, Model model) {
-        model.addAttribute("student",service.getByIdOrEmpty(id));
+        model.addAttribute("student", service.getByIdOrEmpty(id));
 //        List<StudentEntity> studentEntityList = service.findAllStudents();
 //        for (StudentEntity studentEntity : studentEntityList) {
 //            if (studentEntity.getId() == id) {

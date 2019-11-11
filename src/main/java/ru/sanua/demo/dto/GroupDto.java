@@ -6,7 +6,6 @@ public class GroupDto {
     public Integer id;
     private Integer groupId;
     public Integer number;
-  //  public Integer teacherId;
     public Integer subjectId;
 
 
@@ -19,7 +18,6 @@ public class GroupDto {
     }
 
 
-
     public Integer getSubjectId() {
         return subjectId;
     }
@@ -27,14 +25,6 @@ public class GroupDto {
     public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
     }
-
-//    public Integer getTeacherId() {
-//        return teacherId;
-//    }
-//
-//    public void setTeacherId(Integer teacherId) {
-//        this.teacherId = teacherId;
-//    }
 
 
     public Integer getId() {
