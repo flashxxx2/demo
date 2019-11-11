@@ -6,11 +6,11 @@
 </head>
 <body>
 <li data-th-each="botan : ${botans}">
-    <a data-th-href="@{botan/{id}(id=${botan.id})}">
+
      Имя студента   <h3>[[${botan.studentName}]]</h3>
        Средний балл  <h3>[[${botan.avrValue}]]</h3>
         <br> <br>
-    </a>
+
  </li>
 <a href="/ratings">Назад</a>
 <br> <br>

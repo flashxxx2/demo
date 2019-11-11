@@ -1,20 +1,12 @@
 package ru.sanua.demo.dto;
 
+
 public class StudentDto {
     public Integer id;
     public String name;
     public String dateOfBirth;
     public Integer groupId;
-   // public Integer number;
 
-
-//    public Integer getNumber() {
-//        return number;
-//    }
-
-//    public void setNumber(Integer number) {
-//        this.number = number;
-//    }
 
     public Integer getId() {
         return id;

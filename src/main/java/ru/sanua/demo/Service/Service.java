@@ -60,10 +60,6 @@ public class Service {
         Optional<SubjectEntity> optionalSubjectEntity = Optional.of(subjectsRepository.findById(id).orElse(new SubjectEntity()));
         return optionalSubjectEntity.orElseThrow(RuntimeException::new);
     }
-    //    public AverageEntity getByIdAverageOrEmpty(Integer id) {
-//        Optional<AverageEntity> optionalAverageEntity = Optional.of(averageRepository.findById(id).orElse(new AverageEntity()));
-//        return optionalAverageEntity.orElseThrow(RuntimeException::new);
-//    }
 
     public List<StudentEntity> findAllStudents() {
         return studentsRepository.findAll();
@@ -112,6 +108,10 @@ public class Service {
         entity.setValue(rating.getValue());
         entity.setSubjectEntity(subjectsRepository.findById(rating.getSubjectId()).get());
         ratingsRepository.save(entity);
+
+        entity.setStudentEntity(studentsRepository.findById(rating.getStudentId()).get());
+        // entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherId()).get());
+        ratingsRepository.save(entity);
     }
 
     public void saveGroup(GroupDto group) {
@@ -133,10 +133,22 @@ public class Service {
 
     @Transactional
     public void removeStudentById(Integer id) {
-        studentsRepository.deleteById(id);
-        ratingsRepository.deleteById(id);
+        //Вытаскивать по айди студента, у него ретийнг энтити и его обнулить
+        List<RatingEntity> allRatings = findAllRatings();
 
+
+        for (int i = 0; i < allRatings.size(); i++) {
+
+                if (allRatings.get(i).getStudentEntity().getId() == id) {
+                    allRatings.get(i).setStudentEntity(null);
+                }
+
+            }
+
+        studentsRepository.deleteById(id);
     }
+
+
 
     @Transactional
     public void removeTeacherById(Integer id) {
@@ -146,27 +158,25 @@ public class Service {
 
     @Transactional
     public void removeGroupById(Integer id) {
-        for (int i = 0; i < findAllStudents().size(); i++) {
+        List<StudentEntity> allStudents = findAllStudents();
+        for (int i = 0; i < allStudents.size(); i++) {
 
-            if (findAllStudents().get(i).getGroupEntity().getId() == id) {
-                findAllStudents().remove(0);
+            if (allStudents.get(i).getGroupEntity().getId() == id) {
+                allStudents.get(i).setGroupEntity(null);
             }
-
+            groupsRepository.deleteById(id);
         }
-        groupsRepository.deleteById(id);
-
     }
 
 
     @Transactional
     public void removeRatingById(Integer id) {
         ratingsRepository.deleteById(id);
-        studentsRepository.deleteById(id);
     }
 
     public List<AverageDto> getListAvarageDto() {
-        double summ = 0;
-        double avrValue = 0;
+        double summ;
+        double avrValue;
         List<StudentEntity> listOfStudents = studentsRepository.findAll();
         List<AverageDto> averageDtoList = new ArrayList();
         for (int i = 0; i < listOfStudents.size(); i++) {
@@ -179,7 +189,7 @@ public class Service {
                 avrValue = avrValue / 100;
                 averageDto.setAvrValue(avrValue);
                 averageDto.setId(getByIdRatingOrEmpty(j).getId());
-               // averageDto.setStudentId(listOfStudents.get(i).getId());
+                averageDto.setStudentId(listOfStudents.get(i).getId());
                 averageDto.setStudentName(listOfStudents.get(i).getName());
             }
             averageDtoList.add(averageDto);

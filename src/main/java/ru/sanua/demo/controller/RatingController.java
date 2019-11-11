@@ -8,6 +8,8 @@ import ru.sanua.demo.Service.Service;
 import ru.sanua.demo.dto.AverageDto;
 import ru.sanua.demo.dto.RatingDto;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/")
@@ -27,10 +29,15 @@ public class RatingController {
         return "AllRatings";
     }
 
-    @GetMapping("rating/{id}")
-    public String getRatingById(@PathVariable Integer id, Model model) {
-        model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
-        model.addAttribute("average", service.getListAvarageDto().get(id-1));
+    @GetMapping("rating/{userId}")
+    public String getRatingById(@PathVariable Integer userId, Model model) {
+       // model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
+        List<AverageDto> averageDtos = service.getListAvarageDto();
+        for (AverageDto averageDto : averageDtos) {
+            if (averageDto.getStudentId()==userId){
+                model.addAttribute("average", averageDto);
+            }
+        }
         return "viewR";
     }
 
@@ -56,7 +63,7 @@ public class RatingController {
     @GetMapping("rating/{id}/remove")
     public String remove(@PathVariable Integer id, Model model) {
         model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
-        model.addAttribute("student", service.getByIdOrEmpty(id));
+       // model.addAttribute("student", service.getByIdOrEmpty(id));
         return "remove";
     }
 

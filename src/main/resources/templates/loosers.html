@@ -6,11 +6,11 @@
 </head>
 <body>
 <li data-th-each="looser : ${loosers}">
-    <a data-th-href="@{looser/{id}(id=${looser.id})}">
+
         Имя студента   <h3>[[${looser.studentName}]]</h3>
         Средний балл  <h3>[[${looser.avrValue}]]</h3>
         <br> <br>
-    </a>
+
 </li>
 <a href="/ratings">Назад</a>
 <br> <br>
