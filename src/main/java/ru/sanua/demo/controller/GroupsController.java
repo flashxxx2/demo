@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sanua.demo.Service.Service;
 import ru.sanua.demo.dto.GroupDto;
+import ru.sanua.demo.dto.GroupSubjectDto;
+import ru.sanua.demo.entity.SubjectEntity;
 import ru.sanua.demo.repository.GroupsRepository;
 
 
@@ -32,6 +34,8 @@ public class GroupsController {
     @GetMapping("groups/{id}")
     public String getById(@PathVariable Integer id, Model model) {
         model.addAttribute("group", service.getByIdGroupsOrEmpty(id));
+        model.addAttribute("subjects",service.getListSubjectEntityByIdGroup(id));
+
         return "viewG";
     }
 
@@ -62,11 +66,11 @@ public class GroupsController {
         return "addSubject";
     }
 
-//    @PostMapping("/group/{id}/addSubject")
-//    public String saveSubject(@PathVariable Integer id, @ModelAttribute GroupDto groupDto) {
-//        service.saveGroupSubject(groupDto);
-//        return "redirect:/groups";
-//    }
+    @PostMapping("/group/{id}/addSubject")
+    public String saveSubject(@PathVariable Integer id, @ModelAttribute GroupSubjectDto groupSubjectDto) {
+        service.saveGroupSubject(groupSubjectDto);
+        return "redirect:/groups";
+    }
 
     @PostMapping("/group/{id}/edit")
     public String save(@PathVariable int id, @ModelAttribute GroupDto groupDto) {

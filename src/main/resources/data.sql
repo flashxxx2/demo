@@ -1,6 +1,3 @@
-
-
-
 insert into subject (subject_name)
 values ('History'),
        ('Mathematics'),
@@ -19,10 +16,10 @@ values ('History'),
        ('French'),
        ('Botany'),
        ('Health');
-insert into groups (number,subject_id)
-values (793,1),
-       (792,2),
-       (791,3);
+insert into groups (number, subject_id)
+values (793, 1),
+       (792, 2),
+       (791, 3);
 insert into teacher (name, subject_id)
 values ('Malahov', 1),
        ('Gubin', 2),
@@ -55,3 +52,14 @@ VALUES (5, 1, 1),
        (9, 4, 9),
        (4, 5, 7),
        (8, 5, 6);
+
+insert into group_subject (group_id, subject_id)
+values (1, 2),
+       (1, 4),
+       (1, 3),
+       (2, 2),
+       (2, 3),
+       (2, 5),
+       (3, 6),
+       (3, 7),
+       (3, 2);

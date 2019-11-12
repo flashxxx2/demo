@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>University</title>
@@ -8,14 +8,7 @@
 <form method="post">
     Введите номер группы <input name="number" data-th-value="${group.number}">
 
-    Название предмета
-    <select name="subjectId" size="1">
 
-        <th:block th:each="subject:${subjects}">
-            <option select th:value="${subject.id}"> [[${subject.subjectName}]]
-        </th:block>
-
-    </select>
     <button>Save</button>
     <br> <br>
     <a href="/">На главную</a>

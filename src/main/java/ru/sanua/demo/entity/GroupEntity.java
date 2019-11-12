@@ -1,6 +1,7 @@
 package ru.sanua.demo.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "groups")
@@ -9,18 +10,16 @@ public class GroupEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer number;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "subject_id")
-    private SubjectEntity subjectEntity;
+    private Integer subjectId;
+    private Integer groupId;
 
-    public SubjectEntity getSubjectEntity() {
-        return subjectEntity;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public void setSubjectEntity(SubjectEntity subjectEntity) {
-        this.subjectEntity = subjectEntity;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
-
 
     public Integer getId() {
         return id;
@@ -36,6 +35,18 @@ public class GroupEntity {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public Integer getSubjectId() {
+        return subjectId;
+    }
+
+    public Integer getSubjectId(Integer subjectId) {
+        return this.subjectId;
+    }
+
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 
 }

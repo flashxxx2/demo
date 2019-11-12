@@ -2,10 +2,10 @@ package ru.sanua.demo.dto;
 
 
 public class StudentDto {
-    public Integer id;
-    public String name;
-    public String dateOfBirth;
-    public Integer groupId;
+    private Integer id;
+    private String name;
+    private String dateOfBirth;
+    private Integer groupId;
 
 
     public Integer getId() {

@@ -31,10 +31,10 @@ public class RatingController {
 
     @GetMapping("rating/{userId}")
     public String getRatingById(@PathVariable Integer userId, Model model) {
-       // model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
+
         List<AverageDto> averageDtos = service.getListAvarageDto();
         for (AverageDto averageDto : averageDtos) {
-            if (averageDto.getStudentId()==userId){
+            if (averageDto.getStudentId().equals(userId)){
                 model.addAttribute("average", averageDto);
 
             }

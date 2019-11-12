@@ -1,10 +1,10 @@
 package ru.sanua.demo.dto;
 
 public class RatingDto {
-    public Integer id;
-    public Integer studentId;
-    public Double value;
-    public Integer subjectId;
+    private Integer id;
+    private Integer studentId;
+    private Double value;
+    private Integer subjectId;
 
 
 

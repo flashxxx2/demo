@@ -1,12 +1,9 @@
 package ru.sanua.demo.dto;
 
-public class TeacherDto {
+public class GroupSubjectDto {
     private Integer id;
-    public String name;
-    private Integer subjectId;
-
-
     private Integer groupId;
+    private Integer subjectId;
 
     public Integer getGroupId() {
         return groupId;
@@ -16,10 +13,6 @@ public class TeacherDto {
         this.groupId = groupId;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     public Integer getSubjectId() {
         return subjectId;
     }
@@ -27,18 +20,11 @@ public class TeacherDto {
     public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
     }
+    public Integer getId() {
+        return id;
+    }
 
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
 }

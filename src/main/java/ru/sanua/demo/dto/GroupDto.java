@@ -3,10 +3,10 @@ package ru.sanua.demo.dto;
 import javax.persistence.criteria.CriteriaBuilder;
 
 public class GroupDto {
-    public Integer id;
+    private Integer id;
     private Integer groupId;
-    public Integer number;
-    public Integer subjectId;
+    private Integer number;
+    private Integer subjectId;
 
 
     public Integer getGroupId() {

@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sanua.demo.dto.*;
 import ru.sanua.demo.entity.*;
-import ru.sanua.demo.exception.StudentNotFoundException;
 import ru.sanua.demo.repository.*;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
 
@@ -20,9 +18,10 @@ public class Service {
     private final StudentsRepository studentsRepository;
     private final TeachersRepository teachersRepository;
     private final SubjectsRepository subjectsRepository;
+    private final GroupSubjectRepository groupSubjectRepository;
 
 
-    public Service(GroupsRepository groupsRepository, RatingsRepository ratingRepository, StudentsRepository studentsRepository, TeachersRepository teachersRepository, SubjectsRepository subjectRepository) {
+    public Service(GroupsRepository groupsRepository, RatingsRepository ratingRepository, StudentsRepository studentsRepository, TeachersRepository teachersRepository, SubjectsRepository subjectRepository, GroupSubjectRepository groupSubjectRepository) {
         this.groupsRepository = groupsRepository;
         this.ratingsRepository = ratingRepository;
         this.studentsRepository = studentsRepository;
@@ -30,6 +29,7 @@ public class Service {
         this.subjectsRepository = subjectRepository;
 
 
+        this.groupSubjectRepository = groupSubjectRepository;
     }
 
     public List<StudentEntity> getAll() {
@@ -61,6 +61,11 @@ public class Service {
         return optionalSubjectEntity.orElseThrow(RuntimeException::new);
     }
 
+    public GroupSubjectEntity getByIdGroupSubjectOrEmpty(Integer id) {
+        Optional<GroupSubjectEntity> optionalGroupSubjectEntity = Optional.of(groupSubjectRepository.findById(id).orElse(new GroupSubjectEntity()));
+        return optionalGroupSubjectEntity.orElseThrow(RuntimeException::new);
+    }
+
     public List<StudentEntity> findAllStudents() {
         return studentsRepository.findAll();
 
@@ -82,6 +87,10 @@ public class Service {
     public List<TeacherEntity> findAllTeacher() {
         return teachersRepository.findAll();
 
+    }
+
+    public List<GroupSubjectEntity> findAllGroupSubject() {
+        return groupSubjectRepository.findAll();
     }
 
     public void saveStudent(StudentDto student) {
@@ -107,28 +116,22 @@ public class Service {
         RatingEntity entity = getByIdRatingOrEmpty(rating.getId());
         entity.setValue(rating.getValue());
         entity.setSubjectEntity(subjectsRepository.findById(rating.getSubjectId()).get());
-        ratingsRepository.save(entity);
-
         entity.setStudentEntity(studentsRepository.findById(rating.getStudentId()).get());
-        // entity.setTeachersEntity(teachersRepository.findById(rating.getTeacherId()).get());
         ratingsRepository.save(entity);
     }
 
     public void saveGroup(GroupDto group) {
         GroupEntity entity = getByIdGroupsOrEmpty(group.getId());
         entity.setNumber(group.getNumber());
-        entity.setSubjectEntity(subjectsRepository.findById(group.getSubjectId()).get());
-
-
+        entity.setSubjectId(group.getSubjectId());
         groupsRepository.save(entity);
     }
 
-    public void saveGroupSubject(GroupDto group) {
-        GroupEntity entity = getByIdGroupsOrEmpty(group.getId());
-        entity.setSubjectEntity(subjectsRepository.findById(group.getSubjectId()).get());
-        entity.setId(group.getGroupId());
-        entity.setNumber(getByIdGroupsOrEmpty(group.getGroupId()).getNumber());
-        groupsRepository.save(entity);
+    public void saveGroupSubject(GroupSubjectDto groupSubjectDto) {
+        GroupSubjectEntity entity = getByIdGroupSubjectOrEmpty(groupSubjectDto.getId());
+        entity.setGroupEntity(groupsRepository.findById(groupSubjectDto.getGroupId()).get());
+        entity.setSubjectEntity(subjectsRepository.findById(groupSubjectDto.getSubjectId()).get());
+        groupSubjectRepository.save(entity);
     }
 
     @Transactional
@@ -157,6 +160,7 @@ public class Service {
     @Transactional
     public void removeGroupById(Integer id) {
         List<StudentEntity> allStudents = findAllStudents();
+        List<GroupSubjectEntity> allGroupSubject = findAllGroupSubject();
         for (int i = 0; i < allStudents.size(); i++) {
             GroupEntity group = allStudents.get(i).getGroupEntity();
 
@@ -165,13 +169,19 @@ public class Service {
                         get(i).
                         setGroupEntity(null);
             }
-
-
         }
+        for (int j = 0; j < allGroupSubject.size(); j++) {
+            GroupEntity groupEntity = allGroupSubject.get(j).getGroupEntity();
 
+            if (!(groupEntity == (null)) && groupEntity.getId().equals(id)) {
+                allGroupSubject.
+                        get(j).
+                        setGroupEntity(null);
+
+            }
+        }
         groupsRepository.deleteById(id);
     }
-
 
     @Transactional
     public void removeRatingById(Integer id) {
@@ -196,11 +206,26 @@ public class Service {
                 averageDto.setStudentId(listOfStudents.get(i).getId());
                 averageDto.setStudentName(listOfStudents.get(i).getName());
             }
-            if (!(averageDto.getAvrValue()==null)) {
+            if (!(averageDto.getAvrValue() == null)) {
                 averageDtoList.add(averageDto);
             }
         }
         return averageDtoList;
+    }
+
+    public List<GroupSubjectEntity> getListSubjectEntityByIdGroup(Integer id) {
+        List<GroupSubjectEntity> allGroupSubject = findAllGroupSubject();
+        List<GroupSubjectEntity> groupSubjectEntities = new ArrayList<>();
+        for (GroupSubjectEntity groupSubjectEntity : allGroupSubject) {
+            if (groupSubjectEntity.getGroupEntity().getId().equals(id)) {
+                if(groupSubjectEntity.getGroupEntity().getId().equals(id))
+                    groupSubjectEntities.add(groupSubjectEntity);
+
+            }
+        }
+        return groupSubjectEntities;
+
+
     }
 
 
