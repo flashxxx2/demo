@@ -216,16 +216,16 @@ public class Service {
     public List<GroupSubjectEntity> getListSubjectEntityByIdGroup(Integer id) {
         List<GroupSubjectEntity> allGroupSubject = findAllGroupSubject();
         List<GroupSubjectEntity> groupSubjectEntities = new ArrayList<>();
-        for (GroupSubjectEntity groupSubjectEntity : allGroupSubject) {
-            if (groupSubjectEntity.getGroupEntity().getId().equals(id)) {
-                if(groupSubjectEntity.getGroupEntity().getId().equals(id))
+       // for (GroupSubjectEntity groupSubjectEntity : allGroupSubject) {
+        for (int i = 0; i <allGroupSubject.size() ; i++) {
+            GroupSubjectEntity groupSubjectEntity= allGroupSubject.get(i);
+            if ( !(groupSubjectEntity.getGroupEntity()==(null)) &&  groupSubjectEntity.getGroupEntity().getId().equals(id)) {
+
                     groupSubjectEntities.add(groupSubjectEntity);
 
             }
         }
         return groupSubjectEntities;
-
-
     }
 
 

@@ -37,10 +37,11 @@ public class RatingController {
             if (averageDto.getStudentId().equals(userId)){
                 model.addAttribute("average", averageDto);
 
+                return "viewR";
             }
-            else return "exceptionRating";
+
         }
-        return "viewR";
+        return "exceptionRating";
     }
 
 
@@ -65,8 +66,7 @@ public class RatingController {
     @GetMapping("rating/{id}/remove")
     public String remove(@PathVariable Integer id, Model model) {
         model.addAttribute("rating", service.getByIdRatingOrEmpty(id));
-       // model.addAttribute("student", service.getByIdOrEmpty(id));
-        return "remove";
+         return "remove";
     }
 
     @PostMapping("/rating/{id}/remove")
