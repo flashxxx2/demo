@@ -1,25 +1,24 @@
 package ru.sanua.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sanua.demo.Service.Service;
+import ru.sanua.demo.service.GroupService;
 import ru.sanua.demo.dto.StudentDto;
-import ru.sanua.demo.entity.StudentEntity;
-
-import java.util.List;
+import ru.sanua.demo.service.StudentService;
 
 @Controller
 @RequestMapping("/")
 
 public class StudentsController {
-    private final Service service;
+    private final StudentService studentService;
+    private final GroupService groupService;
 
-    @Autowired
-    public StudentsController(Service service) {
-        this.service = service;
+    public StudentsController(StudentService studentService, GroupService groupService) {
+        this.studentService = studentService;
+        this.groupService = groupService;
     }
+
 
     @GetMapping
     public String getAll() {
@@ -28,40 +27,40 @@ public class StudentsController {
 
     @GetMapping("student/{id}")
     public String getById(@PathVariable Integer id, Model model) {
-        model.addAttribute("student", service.getByIdOrEmpty(id));
+        model.addAttribute("student", studentService.getByIdOrEmpty(id));
         return "view";
     }
 
 
     @GetMapping("/students")
     public String findAll(Model model) {
-        model.addAttribute("students", service.findAllStudents());
+        model.addAttribute("students", studentService.findAllStudents());
         return "AllStudents";
     }
 
     @GetMapping("/student/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("student", service.getByIdOrEmpty(id));
-        model.addAttribute("groups", service.findAllGroups());
+        model.addAttribute("student", studentService.getByIdOrEmpty(id));
+        model.addAttribute("groups", groupService.findAllGroups());
         return "edit";
     }
 
 
     @PostMapping("/student/{id}/edit")
     public String save(@PathVariable int id, @ModelAttribute StudentDto studentDto) {
-        service.saveStudent(studentDto);
+        studentService.saveStudent(studentDto);
         return "redirect:/students";
     }
 
     @GetMapping("student/{id}/remove")
     public String remove(@PathVariable Integer id, Model model) {
-        model.addAttribute("student", service.getByIdOrEmpty(id));
+        model.addAttribute("student", studentService.getByIdOrEmpty(id));
         return "remove";
     }
 
     @PostMapping("/student/{id}/remove")
     public String remove(@PathVariable Integer id) {
-        service.removeStudentById(id);
+        studentService.removeStudentById(id);
         return "redirect:/students";
     }
 
