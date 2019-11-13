@@ -10,16 +10,7 @@ public class GroupEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer number;
-    private Integer subjectId;
-    private Integer groupId;
 
-    public Integer getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
-    }
 
     public Integer getId() {
         return id;
@@ -37,19 +28,9 @@ public class GroupEntity {
         this.number = number;
     }
 
-    public Integer getSubjectId() {
-        return subjectId;
-    }
-
-    public Integer getSubjectId(Integer subjectId) {
-        return this.subjectId;
-    }
-
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
-    }
 
 }
+
 
 
 

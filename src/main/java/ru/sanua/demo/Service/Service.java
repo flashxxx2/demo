@@ -108,6 +108,7 @@ public class Service {
         TeacherEntity entity = getByIdTeachersOrEmpty(teacher.getId());
         entity.setName(teacher.getName());
         entity.setSubjectEntity(subjectsRepository.findById(teacher.getSubjectId()).get());
+        entity.setGroupId(teacher.getGroupId());
 
         teachersRepository.save(entity);
     }
@@ -123,7 +124,7 @@ public class Service {
     public void saveGroup(GroupDto group) {
         GroupEntity entity = getByIdGroupsOrEmpty(group.getId());
         entity.setNumber(group.getNumber());
-        entity.setSubjectId(group.getSubjectId());
+
         groupsRepository.save(entity);
     }
 

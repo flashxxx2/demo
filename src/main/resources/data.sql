@@ -16,16 +16,16 @@ values ('History'),
        ('French'),
        ('Botany'),
        ('Health');
-insert into groups (number, subject_id)
-values (793, 1),
-       (792, 2),
-       (791, 3);
-insert into teacher (name, subject_id)
-values ('Malahov', 1),
-       ('Gubin', 2),
-       ('Petrov', 3),
-       ('Sidorov', 4),
-       ('Drakin', 5);
+insert into groups (number)
+values (793),
+       (792),
+       (791);
+insert into teacher (name, subject_id, group_id)
+values ('Malahov', 1,1),
+       ('Gubin', 2,2),
+       ('Petrov', 3,3),
+       ('Sidorov', 4,1),
+       ('Drakin', 5,2);
 
 insert into student (date_of_birth, name, group_id)
 values ('4 March 1992', 'Anton', 1),
