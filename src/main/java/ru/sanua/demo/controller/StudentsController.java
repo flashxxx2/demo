@@ -27,7 +27,7 @@ public class StudentsController {
 
     @GetMapping("student/{id}")
     public String getById(@PathVariable Integer id, Model model) {
-        model.addAttribute("student", studentService.getByIdOrEmpty(id));
+        model.addAttribute("student", studentService.getStudentByStudentIdOrEmpty(id));
         return "view";
     }
 
@@ -40,7 +40,7 @@ public class StudentsController {
 
     @GetMapping("/student/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("student", studentService.getByIdOrEmpty(id));
+        model.addAttribute("student", studentService.getStudentByStudentIdOrEmpty(id));
         model.addAttribute("groups", groupService.findAllGroups());
         return "edit";
     }
@@ -54,13 +54,13 @@ public class StudentsController {
 
     @GetMapping("student/{id}/remove")
     public String remove(@PathVariable Integer id, Model model) {
-        model.addAttribute("student", studentService.getByIdOrEmpty(id));
+        model.addAttribute("student", studentService.getStudentByStudentIdOrEmpty(id));
         return "remove";
     }
 
     @PostMapping("/student/{id}/remove")
     public String remove(@PathVariable Integer id) {
-        studentService.removeStudentById(id);
+        studentService.removeStudentByStudentId(id);
         return "redirect:/students";
     }
 

@@ -1,6 +1,5 @@
 package ru.sanua.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,28 +35,28 @@ public class GroupsController {
 
     @GetMapping("groups/{id}")
     public String getById(@PathVariable Integer id, Model model) {
-        model.addAttribute("group", groupService.getByIdGroupsOrEmpty(id));
-        model.addAttribute("subjects", groupService.getListSubjectEntityByIdGroup(id));
+        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(id));
+        model.addAttribute("subjects", groupService.getSubjectEntityListByGroupSubjectId(id));
 
         return "viewG";
     }
 
     @GetMapping("group/{id}/remove")
     public String remove(@PathVariable Integer id, Model model) {
-        model.addAttribute("group", groupService.getByIdGroupsOrEmpty(id));
+        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(id));
         return "remove";
     }
 
     @PostMapping("/group/{id}/remove")
     public String remove(@PathVariable Integer id) {
-        groupService.removeGroupById(id);
+        groupService.removeGroupByGroupId(id);
         return "redirect:/groups";
     }
 
     @GetMapping("/group/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("subjects", groupService.findAllSubjects());
-        model.addAttribute("group", groupService.getByIdGroupsOrEmpty(id));
+        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(id));
         return "editG";
     }
 
