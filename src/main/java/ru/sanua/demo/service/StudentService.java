@@ -23,7 +23,7 @@ public class StudentService {
         this.ratingsRepository = ratingsRepository;
         this.groupsRepository = groupsRepository;
     }
-    public StudentEntity getStudentByStudentIdOrEmpty(Integer studentId) {
+    public StudentEntity getStudentByIdOrEmpty(Integer studentId) {
         Optional<StudentEntity> optionalStudentsEntity = Optional.of(studentsRepository.findById(studentId).orElse(new StudentEntity()));
         return optionalStudentsEntity.orElseThrow(RuntimeException::new);
     }
@@ -32,7 +32,7 @@ public class StudentService {
 
     }
     public void saveStudent(StudentDto student) {
-        StudentEntity entity = getStudentByStudentIdOrEmpty(student.getId());
+        StudentEntity entity = getStudentByIdOrEmpty(student.getId());
         entity.setName(student.getName());
         entity.setDateOfBirth(student.getDateOfBirth());
         entity.setGroupEntity(groupsRepository.findById(student.getGroupId()).get());
@@ -42,7 +42,7 @@ public class StudentService {
 
     }
     @Transactional
-    public void removeStudentByStudentId(Integer studentId) {
+    public void removeStudentById(Integer studentId) {
 
         List<RatingEntity> allRatings =ratingsRepository.findAll();
         for (int i = 0; i < allRatings.size(); i++) {

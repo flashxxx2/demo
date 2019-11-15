@@ -35,28 +35,28 @@ public class GroupsController {
 
     @GetMapping("groups/{groupId}")
     public String getById(@PathVariable Integer groupId, Model model) {
-        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(groupId));
-        model.addAttribute("subjects", groupService.getSubjectEntityListByGroupId(groupId));
+        model.addAttribute("group", groupService.getGroupByIdOrEmpty(groupId));
+        model.addAttribute("subjects", groupService.getSubjectEntityListById(groupId));
 
         return "viewG";
     }
 
     @GetMapping("group/{groupId}/remove")
     public String remove(@PathVariable Integer groupId, Model model) {
-        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(groupId));
+        model.addAttribute("group", groupService.getGroupByIdOrEmpty(groupId));
         return "remove";
     }
 
     @PostMapping("/group/{groupId}/remove")
     public String remove(@PathVariable Integer groupId) {
-        groupService.removeGroupByGroupId(groupId);
+        groupService.removeGroupById(groupId);
         return "redirect:/groups";
     }
 
     @GetMapping("/group/{groupId}/edit")
     public String edit(@PathVariable Integer groupId, Model model) {
         model.addAttribute("subjects", groupService.findAllSubjects());
-        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(groupId));
+        model.addAttribute("group", groupService.getGroupByIdOrEmpty(groupId));
         return "editG";
     }
 

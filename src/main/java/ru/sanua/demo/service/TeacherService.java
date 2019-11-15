@@ -20,7 +20,7 @@ public class TeacherService {
         this.subjectsRepository = subjectsRepository;
     }
 
-    public TeacherEntity getTeacherByTeacherIdOrEmpty(Integer teacherId) {
+    public TeacherEntity getTeacherByIdOrEmpty(Integer teacherId) {
         Optional<TeacherEntity> optionalTeachersEntity = Optional.of(teachersRepository.findById(teacherId).orElse(new TeacherEntity()));
         return optionalTeachersEntity.orElseThrow(RuntimeException::new);
     }
@@ -31,7 +31,7 @@ public class TeacherService {
     }
 
     public void saveTeacher(TeacherDto teacher) {
-        TeacherEntity entity = getTeacherByTeacherIdOrEmpty(teacher.getId());
+        TeacherEntity entity = getTeacherByIdOrEmpty(teacher.getId());
         entity.setName(teacher.getName());
         entity.setSubjectEntity(subjectsRepository.findById(teacher.getSubjectId()).get());
         entity.setGroupId(teacher.getGroupId());
@@ -39,7 +39,7 @@ public class TeacherService {
         teachersRepository.save(entity);
     }
     @Transactional
-    public void removeTeacherByTeacherId(Integer teacherId) {
+    public void removeTeacherById(Integer teacherId) {
         teachersRepository.deleteById(teacherId);
 
     }

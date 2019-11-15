@@ -27,13 +27,13 @@ public class RatingService {
         this.subjectsRepository = subjectsRepository;
     }
 
-    public RatingEntity getRatingByRatingId(Integer ratingId) {
+    public RatingEntity getRatingById(Integer ratingId) {
         Optional<RatingEntity> optionalRatingEntity = Optional.of(ratingsRepository.findById(ratingId).orElse(new RatingEntity()));
         return optionalRatingEntity.orElseThrow(RuntimeException::new);
     }
 
     public void saveRating(RatingDto rating) {
-        RatingEntity entity = getRatingByRatingId(rating.getId());
+        RatingEntity entity = getRatingById(rating.getId());
         entity.setValue(rating.getValue());
         entity.setSubjectEntity(subjectsRepository.findById(rating.getSubjectId()).get());
         entity.setStudentEntity(studentsRepository.findById(rating.getStudentId()).get());
@@ -41,7 +41,7 @@ public class RatingService {
     }
 
     @Transactional
-    public void removeRatingByRatingId(Integer ratingId) {
+    public void removeRatingById(Integer ratingId) {
         ratingsRepository.deleteById(ratingId);
     }
 
@@ -59,7 +59,7 @@ public class RatingService {
                 avrValue = Math.round(avrValue * 100);
                 avrValue = avrValue / 100;
                 averageDto.setAvrValue(avrValue);
-                averageDto.setId(getRatingByRatingId(j).getId());
+                averageDto.setId(getRatingById(j).getId());
                 averageDto.setStudentId(listOfStudents.get(i).getId());
                 averageDto.setStudentName(listOfStudents.get(i).getName());
             }

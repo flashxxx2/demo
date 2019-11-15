@@ -54,7 +54,7 @@ public class RatingController {
 
         model.addAttribute("students", studentService.findAllStudents());
         model.addAttribute("subjects", groupService.findAllSubjects());
-        model.addAttribute("rating", ratingService.getRatingByRatingId(ratingId));
+        model.addAttribute("rating", ratingService.getRatingById(ratingId));
         return "editR";
     }
 
@@ -69,13 +69,13 @@ public class RatingController {
 
     @GetMapping("rating/{ratingId}/remove")
     public String remove(@PathVariable Integer ratingId, Model model) {
-        model.addAttribute("rating", ratingService.getRatingByRatingId(ratingId));
+        model.addAttribute("rating", ratingService.getRatingById(ratingId));
          return "remove";
     }
 
     @PostMapping("/rating/{ratingId}/remove")
     public String remove(@PathVariable Integer ratingId) {
-        ratingService.removeRatingByRatingId(ratingId);
+        ratingService.removeRatingById(ratingId);
         return "redirect:/ratings";
     }
 

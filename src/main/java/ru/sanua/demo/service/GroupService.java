@@ -33,16 +33,17 @@ public class GroupService {
         this.studentsRepository = studentsRepository;
     }
 
-    public GroupEntity getGroupByGroupIdOrEmpty(Integer teacherId) {
+    public GroupEntity getGroupByIdOrEmpty(Integer teacherId) {
         Optional<GroupEntity> optionalGroupsEntity = Optional.of(groupsRepository.findById(teacherId).orElse(new GroupEntity()));
         return optionalGroupsEntity.orElseThrow(RuntimeException::new);
     }
+
     public SubjectEntity getSubjectBySubjectIdOrEmpty(Integer subjectId) {
         Optional<SubjectEntity> optionalSubjectEntity = Optional.of(subjectsRepository.findById(subjectId).orElse(new SubjectEntity()));
         return optionalSubjectEntity.orElseThrow(RuntimeException::new);
     }
 
-    public GroupSubjectEntity getGroupSubjectByGroupSubjectIdOrEmpty(Integer groupSubjectId) {
+    public GroupSubjectEntity getGroupSubjectByIdOrEmpty(Integer groupSubjectId) {
         Optional<GroupSubjectEntity> optionalGroupSubjectEntity = Optional.of(groupSubjectRepository.findById(groupSubjectId).orElse(new GroupSubjectEntity()));
         return optionalGroupSubjectEntity.orElseThrow(RuntimeException::new);
     }
@@ -51,29 +52,30 @@ public class GroupService {
         return groupsRepository.findAll();
 
     }
+
     public List<SubjectEntity> findAllSubjects() {
         return subjectsRepository.findAll();
-   }
+    }
 
     public List<GroupSubjectEntity> findAllGroupSubject() {
         return groupSubjectRepository.findAll();
     }
 
     public void saveGroup(GroupDto group) {
-        GroupEntity entity = getGroupByGroupIdOrEmpty(group.getId());
+        GroupEntity entity = getGroupByIdOrEmpty(group.getId());
         entity.setNumber(group.getNumber());
         groupsRepository.save(entity);
     }
 
     public void saveGroupSubject(GroupSubjectDto groupSubjectDto) {
-        GroupSubjectEntity entity = getGroupSubjectByGroupSubjectIdOrEmpty(groupSubjectDto.getId());
+        GroupSubjectEntity entity = getGroupSubjectByIdOrEmpty(groupSubjectDto.getId());
         entity.setGroupEntity(groupsRepository.findById(groupSubjectDto.getGroupId()).get());
         entity.setSubjectEntity(subjectsRepository.findById(groupSubjectDto.getSubjectId()).get());
         groupSubjectRepository.save(entity);
     }
 
     @Transactional
-    public void removeGroupByGroupId(Integer groupId) {
+    public void removeGroupById(Integer groupId) {
         List<StudentEntity> allStudents = studentsRepository.findAll();
         List<GroupSubjectEntity> allGroupSubject = findAllGroupSubject();
         for (int i = 0; i < allStudents.size(); i++) {
@@ -98,7 +100,7 @@ public class GroupService {
         groupsRepository.deleteById(groupId);
     }
 
-    public List<GroupSubjectEntity> getSubjectEntityListByGroupId(Integer groupId) {
+    public List<GroupSubjectEntity> getSubjectEntityListById(Integer groupId) {
         List<GroupSubjectEntity> allGroupSubject = findAllGroupSubject();
         List<GroupSubjectEntity> groupSubjectEntities = new ArrayList<>();
         for (int i = 0; i < allGroupSubject.size(); i++) {

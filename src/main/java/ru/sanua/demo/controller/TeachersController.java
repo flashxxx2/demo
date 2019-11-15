@@ -28,26 +28,26 @@ public class TeachersController {
 
     @GetMapping("teacher/{teacherId}")
     public String getById(@PathVariable Integer teacherId, Model model) {
-        model.addAttribute("teacher", teacherService.getTeacherByTeacherIdOrEmpty(teacherId));
+        model.addAttribute("teacher", teacherService.getTeacherByIdOrEmpty(teacherId));
         return "viewT";
     }
 
     @GetMapping("teacher/{teacherId}/remove")
     public String remove(@PathVariable Integer teacherId, Model model) {
-        model.addAttribute("teacher", teacherService.getTeacherByTeacherIdOrEmpty(teacherId));
+        model.addAttribute("teacher", teacherService.getTeacherByIdOrEmpty(teacherId));
         return "remove";
     }
 
     @PostMapping("/teacher/{teacherId}/remove")
     public String remove(@PathVariable Integer teacherId) {
-        teacherService.removeTeacherByTeacherId(teacherId);
+        teacherService.removeTeacherById(teacherId);
         return "redirect:/teachers";
     }
 
     @GetMapping("/teacher/{teacherId}/edit")
     public String edit(@PathVariable Integer teacherId, Model model) {
         model.addAttribute("subjects", groupService.findAllSubjects());
-        model.addAttribute("teacher", teacherService.getTeacherByTeacherIdOrEmpty(teacherId));
+        model.addAttribute("teacher", teacherService.getTeacherByIdOrEmpty(teacherId));
         model.addAttribute("groups", groupService.findAllGroups());
         return "editT";
     }
