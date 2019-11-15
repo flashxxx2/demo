@@ -41,7 +41,7 @@ public class RatingService {
     }
 
     @Transactional
-    public void removeRatingById(Integer ratingId) {
+    public void removeRatingByRatingId(Integer ratingId) {
         ratingsRepository.deleteById(ratingId);
     }
 

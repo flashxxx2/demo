@@ -33,30 +33,30 @@ public class GroupsController {
         return "AllGroups";
     }
 
-    @GetMapping("groups/{id}")
-    public String getById(@PathVariable Integer id, Model model) {
-        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(id));
-        model.addAttribute("subjects", groupService.getSubjectEntityListByGroupSubjectId(id));
+    @GetMapping("groups/{groupId}")
+    public String getById(@PathVariable Integer groupId, Model model) {
+        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(groupId));
+        model.addAttribute("subjects", groupService.getSubjectEntityListByGroupId(groupId));
 
         return "viewG";
     }
 
-    @GetMapping("group/{id}/remove")
-    public String remove(@PathVariable Integer id, Model model) {
-        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(id));
+    @GetMapping("group/{groupId}/remove")
+    public String remove(@PathVariable Integer groupId, Model model) {
+        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(groupId));
         return "remove";
     }
 
-    @PostMapping("/group/{id}/remove")
-    public String remove(@PathVariable Integer id) {
-        groupService.removeGroupByGroupId(id);
+    @PostMapping("/group/{groupId}/remove")
+    public String remove(@PathVariable Integer groupId) {
+        groupService.removeGroupByGroupId(groupId);
         return "redirect:/groups";
     }
 
-    @GetMapping("/group/{id}/edit")
-    public String edit(@PathVariable Integer id, Model model) {
+    @GetMapping("/group/{groupId}/edit")
+    public String edit(@PathVariable Integer groupId, Model model) {
         model.addAttribute("subjects", groupService.findAllSubjects());
-        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(id));
+        model.addAttribute("group", groupService.getGroupByGroupIdOrEmpty(groupId));
         return "editG";
     }
 

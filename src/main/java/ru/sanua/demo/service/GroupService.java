@@ -98,12 +98,12 @@ public class GroupService {
         groupsRepository.deleteById(groupId);
     }
 
-    public List<GroupSubjectEntity> getSubjectEntityListByGroupSubjectId(Integer groupSubjectId) {
+    public List<GroupSubjectEntity> getSubjectEntityListByGroupId(Integer groupId) {
         List<GroupSubjectEntity> allGroupSubject = findAllGroupSubject();
         List<GroupSubjectEntity> groupSubjectEntities = new ArrayList<>();
         for (int i = 0; i < allGroupSubject.size(); i++) {
             GroupSubjectEntity groupSubjectEntity = allGroupSubject.get(i);
-            if (!(groupSubjectEntity.getGroupEntity() == (null)) && groupSubjectEntity.getGroupEntity().getId().equals(groupSubjectId)) {
+            if (!(groupSubjectEntity.getGroupEntity() == (null)) && groupSubjectEntity.getGroupEntity().getId().equals(groupId)) {
 
                 groupSubjectEntities.add(groupSubjectEntity);
 
