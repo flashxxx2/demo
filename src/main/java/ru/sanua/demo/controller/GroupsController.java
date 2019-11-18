@@ -1,6 +1,5 @@
 package ru.sanua.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,30 +33,30 @@ public class GroupsController {
         return "AllGroups";
     }
 
-    @GetMapping("groups/{id}")
-    public String getById(@PathVariable Integer id, Model model) {
-        model.addAttribute("group", groupService.getByIdGroupsOrEmpty(id));
-        model.addAttribute("subjects", groupService.getListSubjectEntityByIdGroup(id));
+    @GetMapping("groups/{groupId}")
+    public String getById(@PathVariable Integer groupId, Model model) {
+        model.addAttribute("group", groupService.getGroupByIdOrEmpty(groupId));
+        model.addAttribute("subjects", groupService.getSubjectEntityListByGroupId(groupId));
 
         return "viewG";
     }
 
-    @GetMapping("group/{id}/remove")
-    public String remove(@PathVariable Integer id, Model model) {
-        model.addAttribute("group", groupService.getByIdGroupsOrEmpty(id));
+    @GetMapping("group/{groupId}/remove")
+    public String remove(@PathVariable Integer groupId, Model model) {
+        model.addAttribute("group", groupService.getGroupByIdOrEmpty(groupId));
         return "remove";
     }
 
-    @PostMapping("/group/{id}/remove")
-    public String remove(@PathVariable Integer id) {
-        groupService.removeGroupById(id);
+    @PostMapping("/group/{groupId}/remove")
+    public String remove(@PathVariable Integer groupId) {
+        groupService.removeGroupById(groupId);
         return "redirect:/groups";
     }
 
-    @GetMapping("/group/{id}/edit")
-    public String edit(@PathVariable Integer id, Model model) {
+    @GetMapping("/group/{groupId}/edit")
+    public String edit(@PathVariable Integer groupId, Model model) {
         model.addAttribute("subjects", groupService.findAllSubjects());
-        model.addAttribute("group", groupService.getByIdGroupsOrEmpty(id));
+        model.addAttribute("group", groupService.getGroupByIdOrEmpty(groupId));
         return "editG";
     }
 

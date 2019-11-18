@@ -1,6 +1,5 @@
 package ru.sanua.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,29 +26,28 @@ public class TeachersController {
         return "AllTeacher";
     }
 
-    @GetMapping("teacher/{id}")
-    public String getById(@PathVariable Integer id, Model model) {
-        model.addAttribute("subject", groupService.getByIdSubjectOrEmpty(id));
-        model.addAttribute("teacher", teacherService.getByIdTeachersOrEmpty(id));
+    @GetMapping("teacher/{teacherId}")
+    public String getById(@PathVariable Integer teacherId, Model model) {
+        model.addAttribute("teacher", teacherService.getTeacherByIdOrEmpty(teacherId));
         return "viewT";
     }
 
-    @GetMapping("teacher/{id}/remove")
-    public String remove(@PathVariable Integer id, Model model) {
-        model.addAttribute("teacher", teacherService.getByIdTeachersOrEmpty(id));
+    @GetMapping("teacher/{teacherId}/remove")
+    public String remove(@PathVariable Integer teacherId, Model model) {
+        model.addAttribute("teacher", teacherService.getTeacherByIdOrEmpty(teacherId));
         return "remove";
     }
 
-    @PostMapping("/teacher/{id}/remove")
-    public String remove(@PathVariable Integer id) {
-        teacherService.removeTeacherById(id);
+    @PostMapping("/teacher/{teacherId}/remove")
+    public String remove(@PathVariable Integer teacherId) {
+        teacherService.removeTeacherById(teacherId);
         return "redirect:/teachers";
     }
 
-    @GetMapping("/teacher/{id}/edit")
-    public String edit(@PathVariable Integer id, Model model) {
+    @GetMapping("/teacher/{teacherId}/edit")
+    public String edit(@PathVariable Integer teacherId, Model model) {
         model.addAttribute("subjects", groupService.findAllSubjects());
-        model.addAttribute("teacher", teacherService.getByIdTeachersOrEmpty(id));
+        model.addAttribute("teacher", teacherService.getTeacherByIdOrEmpty(teacherId));
         model.addAttribute("groups", groupService.findAllGroups());
         return "editT";
     }

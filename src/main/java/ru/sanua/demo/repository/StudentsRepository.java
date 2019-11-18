@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface StudentsRepository extends JpaRepository<StudentEntity, Integer> {
     List<StudentEntity> findAll();
-   // List<StudentsEntity> findStudentsEntitiesBy
-
-       }
+}

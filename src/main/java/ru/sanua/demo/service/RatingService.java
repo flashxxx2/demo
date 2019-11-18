@@ -27,17 +27,13 @@ public class RatingService {
         this.subjectsRepository = subjectsRepository;
     }
 
-    public RatingEntity getByIdRatingOrEmpty(Integer id) {
-        Optional<RatingEntity> optionalRatingEntity = Optional.of(ratingsRepository.findById(id).orElse(new RatingEntity()));
+    public RatingEntity getRatingById(Integer ratingId) {
+        Optional<RatingEntity> optionalRatingEntity = Optional.of(ratingsRepository.findById(ratingId).orElse(new RatingEntity()));
         return optionalRatingEntity.orElseThrow(RuntimeException::new);
     }
 
-    public List<RatingEntity> findAllRatings() {
-        return ratingsRepository.findAll();
-    }
-
-    public void saveRaiting(RatingDto rating) {
-        RatingEntity entity = getByIdRatingOrEmpty(rating.getId());
+    public void saveRating(RatingDto rating) {
+        RatingEntity entity = getRatingById(rating.getId());
         entity.setValue(rating.getValue());
         entity.setSubjectEntity(subjectsRepository.findById(rating.getSubjectId()).get());
         entity.setStudentEntity(studentsRepository.findById(rating.getStudentId()).get());
@@ -45,11 +41,11 @@ public class RatingService {
     }
 
     @Transactional
-    public void removeRatingById(Integer id) {
-        ratingsRepository.deleteById(id);
+    public void removeRatingById(Integer ratingId) {
+        ratingsRepository.deleteById(ratingId);
     }
 
-    public List<AverageDto> getListAvarageDto() {
+    public List<AverageDto> getAvarageDtoList() {
         double summ;
         double avrValue;
         List<StudentEntity> listOfStudents = studentsRepository.findAll();
@@ -63,7 +59,7 @@ public class RatingService {
                 avrValue = Math.round(avrValue * 100);
                 avrValue = avrValue / 100;
                 averageDto.setAvrValue(avrValue);
-                averageDto.setId(getByIdRatingOrEmpty(j).getId());
+                averageDto.setId(getRatingById(j).getId());
                 averageDto.setStudentId(listOfStudents.get(i).getId());
                 averageDto.setStudentName(listOfStudents.get(i).getName());
             }
@@ -74,8 +70,8 @@ public class RatingService {
         return averageDtoList;
     }
 
-    public List<AverageDto> getListBotans() {
-        List<AverageDto> listBotans = getListAvarageDto();
+    public List<AverageDto> getBotansList() {
+        List<AverageDto> listBotans = getAvarageDtoList();
         listBotans.sort(new Comparator<AverageDto>() {
             @Override
             public int compare(AverageDto o1, AverageDto o2) {
@@ -87,8 +83,8 @@ public class RatingService {
         return listBotans.subList(0, 3);
     }
 
-    public List<AverageDto> getListLoosers() {
-        List<AverageDto> listLoosers = getListAvarageDto();
+    public List<AverageDto> getLoosersList() {
+        List<AverageDto> listLoosers = getAvarageDtoList();
         listLoosers.sort(new Comparator<AverageDto>() {
             @Override
             public int compare(AverageDto o1, AverageDto o2) {

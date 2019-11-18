@@ -23,8 +23,8 @@ public class StudentService {
         this.ratingsRepository = ratingsRepository;
         this.groupsRepository = groupsRepository;
     }
-    public StudentEntity getByIdOrEmpty(Integer id) {
-        Optional<StudentEntity> optionalStudentsEntity = Optional.of(studentsRepository.findById(id).orElse(new StudentEntity()));
+    public StudentEntity getStudentByIdOrEmpty(Integer studentId) {
+        Optional<StudentEntity> optionalStudentsEntity = Optional.of(studentsRepository.findById(studentId).orElse(new StudentEntity()));
         return optionalStudentsEntity.orElseThrow(RuntimeException::new);
     }
     public List<StudentEntity> findAllStudents() {
@@ -32,7 +32,7 @@ public class StudentService {
 
     }
     public void saveStudent(StudentDto student) {
-        StudentEntity entity = getByIdOrEmpty(student.getId());
+        StudentEntity entity = getStudentByIdOrEmpty(student.getId());
         entity.setName(student.getName());
         entity.setDateOfBirth(student.getDateOfBirth());
         entity.setGroupEntity(groupsRepository.findById(student.getGroupId()).get());
@@ -42,18 +42,18 @@ public class StudentService {
 
     }
     @Transactional
-    public void removeStudentById(Integer id) {
+    public void removeStudentById(Integer studentId) {
 
         List<RatingEntity> allRatings =ratingsRepository.findAll();
         for (int i = 0; i < allRatings.size(); i++) {
             StudentEntity student = allRatings.get(i).getStudentEntity();
 
-            if (!(student == null) && student.getId().equals(id)) {
+            if (!(student == null) && student.getId().equals(studentId)) {
                 allRatings.get(i).setStudentEntity(null);
             }
 
         }
 
-        studentsRepository.deleteById(id);
+        studentsRepository.deleteById(studentId);
     }
 }

@@ -35,12 +35,12 @@ public class RatingController {
 
     }
 
-    @GetMapping("rating/{userId}")
-    public String getRatingById(@PathVariable Integer userId, Model model) {
+    @GetMapping("rating/{studentId}")
+    public String getRatingById(@PathVariable Integer studentId, Model model) {
 
-        List<AverageDto> averageDtos = ratingService.getListAvarageDto();
+        List<AverageDto> averageDtos = ratingService.getAvarageDtoList();
         for (AverageDto averageDto : averageDtos) {
-            if (averageDto.getStudentId().equals(userId)){
+            if (averageDto.getStudentId().equals(studentId)){
                 model.addAttribute("average", averageDto);
 
                 return "viewR";
@@ -49,45 +49,45 @@ public class RatingController {
         }
         return "exceptionRating";
     }
-    @GetMapping("/rating/{id}/edit")
-    public String edit(@PathVariable Integer id, Model model) {
+    @GetMapping("/rating/{ratingId}/edit")
+    public String edit(@PathVariable Integer ratingId, Model model) {
 
         model.addAttribute("students", studentService.findAllStudents());
         model.addAttribute("subjects", groupService.findAllSubjects());
-        model.addAttribute("rating", ratingService.getByIdRatingOrEmpty(id));
+        model.addAttribute("rating", ratingService.getRatingById(ratingId));
         return "editR";
     }
 
 
     @PostMapping("/rating/{id}/edit")
     public String save(@PathVariable int id, @ModelAttribute RatingDto ratingDto) {
-        ratingService.saveRaiting(ratingDto);
+        ratingService.saveRating(ratingDto);
 
         return "redirect:/ratings";
     }
 
 
-    @GetMapping("rating/{id}/remove")
-    public String remove(@PathVariable Integer id, Model model) {
-        model.addAttribute("rating", ratingService.getByIdRatingOrEmpty(id));
+    @GetMapping("rating/{ratingId}/remove")
+    public String remove(@PathVariable Integer ratingId, Model model) {
+        model.addAttribute("rating", ratingService.getRatingById(ratingId));
          return "remove";
     }
 
-    @PostMapping("/rating/{id}/remove")
-    public String remove(@PathVariable Integer id) {
-        ratingService.removeRatingById(id);
+    @PostMapping("/rating/{ratingId}/remove")
+    public String remove(@PathVariable Integer ratingId) {
+        ratingService.removeRatingById(ratingId);
         return "redirect:/ratings";
     }
 
     @GetMapping("/ratings/botans")
     public String getBotans(Model model) {
-        model.addAttribute("botans", ratingService.getListBotans());
+        model.addAttribute("botans", ratingService.getBotansList());
         return "botans";
     }
 
       @GetMapping("/ratings/loosers")
     public String getLoosers(Model model) {
-        model.addAttribute("loosers", ratingService.getListLoosers());
+        model.addAttribute("loosers", ratingService.getLoosersList());
         return "loosers";
     }
 
