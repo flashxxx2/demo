@@ -33,12 +33,12 @@ public class GroupService {
         this.studentsRepository = studentsRepository;
     }
 
-    public GroupEntity getGroupByIdOrEmpty(Integer teacherId) {
-        Optional<GroupEntity> optionalGroupsEntity = Optional.of(groupsRepository.findById(teacherId).orElse(new GroupEntity()));
+    public GroupEntity getGroupByIdOrEmpty(Integer groupId) {
+        Optional<GroupEntity> optionalGroupsEntity = Optional.of(groupsRepository.findById(groupId).orElse(new GroupEntity()));
         return optionalGroupsEntity.orElseThrow(RuntimeException::new);
     }
 
-    public SubjectEntity getSubjectBySubjectIdOrEmpty(Integer subjectId) {
+    public SubjectEntity getSubjectByIdOrEmpty(Integer subjectId) {
         Optional<SubjectEntity> optionalSubjectEntity = Optional.of(subjectsRepository.findById(subjectId).orElse(new SubjectEntity()));
         return optionalSubjectEntity.orElseThrow(RuntimeException::new);
     }
@@ -100,7 +100,7 @@ public class GroupService {
         groupsRepository.deleteById(groupId);
     }
 
-    public List<GroupSubjectEntity> getSubjectEntityListById(Integer groupId) {
+    public List<GroupSubjectEntity> getSubjectEntityListByGroupId(Integer groupId) {
         List<GroupSubjectEntity> allGroupSubject = findAllGroupSubject();
         List<GroupSubjectEntity> groupSubjectEntities = new ArrayList<>();
         for (int i = 0; i < allGroupSubject.size(); i++) {

@@ -36,7 +36,7 @@ public class GroupsController {
     @GetMapping("groups/{groupId}")
     public String getById(@PathVariable Integer groupId, Model model) {
         model.addAttribute("group", groupService.getGroupByIdOrEmpty(groupId));
-        model.addAttribute("subjects", groupService.getSubjectEntityListById(groupId));
+        model.addAttribute("subjects", groupService.getSubjectEntityListByGroupId(groupId));
 
         return "viewG";
     }
