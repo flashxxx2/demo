@@ -17,10 +17,11 @@ import java.util.Optional;
 
 @Service
 public class RatingService {
+
     private final RatingsRepository ratingsRepository;
     private final StudentsRepository studentsRepository;
     private final SubjectsRepository subjectsRepository;
-
+    private static final Integer NUMBER_OF_STUDENTS=3;
     public RatingService(RatingsRepository ratingsRepository, StudentsRepository studentsRepository, SubjectsRepository subjectsRepository) {
         this.ratingsRepository = ratingsRepository;
         this.studentsRepository = studentsRepository;
@@ -80,7 +81,7 @@ public class RatingService {
                 else return 1;
             }
         });
-        return listBotans.subList(0, 3);
+        return listBotans.subList(0, NUMBER_OF_STUDENTS);
     }
 
     public List<AverageDto> getLoosersList() {
@@ -93,7 +94,7 @@ public class RatingService {
                 else return -1;
             }
         });
-        return listLoosers.subList(0, 3);
+        return listLoosers.subList(0, NUMBER_OF_STUDENTS);
     }
 }
 
