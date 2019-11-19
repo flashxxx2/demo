@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>University</title>
+</head>
+<body>
+<li data-th-each="looser : ${loosers}">
+
+        Имя студента   <h3>[[${looser.studentName}]]</h3>
+        Средний балл  <h3>[[${looser.avrValue}]]</h3>
+        <br> <br>
+
+</li>
+<a href="/ratings">Назад</a>
+<br> <br>
+</body>
+</html>

@@ -4,13 +4,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "groups")
-public class GroupEntity {
+@Table(name = "subject")
+public class SubjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer number;
-
+    private String subjectName;
 
     public Integer getId() {
         return id;
@@ -20,17 +19,11 @@ public class GroupEntity {
         this.id = id;
     }
 
-    public Integer getNumber() {
-        return number;
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
-
-
 }
-
-
-
-

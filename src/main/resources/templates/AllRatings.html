@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>University</title>
+</head>
+<body>
+<ul>
+    Чтобы посмотреть успеваемость, выберите студента:
+    <li data-th-each="rating : ${ratings}">
+        <a data-th-href="@{rating/{id}(id=${rating.id})}">
+            [[${rating.name}]]
+        </a>
+
+    </li>
+</ul>
+<br>     <br>
+
+<button><a href="/ratings/botans/" class="btn btn-danger" type="submit">Показать ботанов</a></button>
+<br> <br>
+
+<button><a href="/ratings/loosers" class="btn btn-danger" type="submit">Показать лузеров</a></button>
+<br> <br>
+<a href="/">На главную</a>
+</body>
+</html>

@@ -3,7 +3,13 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
+    initialization-mode: always
+    platform: postgres
+
   jpa:
+
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
+      show-sql: true
+server:
+  port: 8080

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+    <li data-th-each="group : ${groups}">
+        <a data-th-href="@{groups/{id}(id=${group.id})}">
+            [[${group.number}]]
+        </a>
+    </li>
+</ul>
+<a data-th-href="@{/group/0/addSubject}">Добавить новых предметов в группу</a>
+<br> <br>
+<br> <br>
+<a data-th-href="@{/group/0/edit}">Добавить группу</a>
+
+<br>     <br>
+<a href="/">На главную</a>
+</body>
+</html>

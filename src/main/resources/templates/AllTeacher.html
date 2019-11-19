@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+<li data-th-each="teacher : ${teachers}">
+    <a data-th-href="@{teacher/{id}(id=${teacher.id})}">
+        [[${teacher.name}]]
+    </a>
+</li>
+</ul>
+<a data-th-href="@{/teacher/0/edit}">Добавить нового преподавателя</a>
+<br>     <br>
+<a href="/">На главную</a>
+</body>
+</html>
